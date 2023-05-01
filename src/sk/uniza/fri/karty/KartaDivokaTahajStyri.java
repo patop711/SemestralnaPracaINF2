@@ -62,6 +62,7 @@ public class KartaDivokaTahajStyri extends Karta {
         //Ked je tato karta pouzita, tak sa preskoci na dalsieho hraca, ktorý si musí tahať 4 karty a
         //tým pádom stratí možnosť byť na rade a ide na dalsieho hraca
         this.vyberSiFarbu();
+        hrac.getHra().dalsiHrac();
         hrac.getHra().dajHracoviKartyPodlaPoctu(4);
         return true;
     }

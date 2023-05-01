@@ -109,7 +109,7 @@ public class Hrac {
                     int predchazdajuceY = kartaVRuke.getVonkajsiaVrstva().getY();
                     kartaVRuke.zmenPoziciu(predchazdajuceX - 88, predchazdajuceY);
                 }
-                this.getHra().dalsiHrac();
+                //this.getHra().dalsiHrac();
             }
         }
     }
@@ -136,7 +136,7 @@ public class Hrac {
             Karta novaKarta = karta;
             Karta poslednaKarta = this.getMojeKarty().get(this.getMojeKarty().size() - 1);
 
-            if (this.getMojeKarty().size() < 7) {
+            if (this.getMojeKarty().size() < 14) {
                 this.getMojeKarty().add(novaKarta);
                 novaKarta.zmenPoziciu(poslednaKarta.getVonkajsiaVrstva().getX() + 88, poslednaKarta.getVonkajsiaVrstva().getY());
                 vysledok = true;

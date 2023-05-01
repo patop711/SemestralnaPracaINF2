@@ -32,9 +32,11 @@ public class KartaOtocit extends Karta {
 
             if (hrac.getHra().getPoSmereHodinovychRuciciek()) {
                 hrac.getHra().setPoSmereHodinovychRuciciek(false);
+                hrac.getHra().dalsiHrac();
                 return true;
             } else {
                 hrac.getHra().setPoSmereHodinovychRuciciek(true);
+                hrac.getHra().dalsiHrac();
                 return true;
             }
         } else {
