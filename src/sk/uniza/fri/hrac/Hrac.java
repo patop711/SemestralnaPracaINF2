@@ -1,9 +1,7 @@
 package sk.uniza.fri.hrac;
 
 import sk.uniza.fri.hlavnyProgram.Hra;
-import sk.uniza.fri.karty.IDivokaKarta;
 import sk.uniza.fri.karty.Karta;
-import sk.uniza.fri.karty.KartaDivoka;
 import sk.uniza.fri.shapesge.Text;
 
 import java.util.ArrayList;
