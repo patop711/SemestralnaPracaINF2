@@ -6,7 +6,7 @@ import sk.uniza.fri.shapesge.Rectangle;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 
-public class KartaDivokaTahajStyri extends Karta implements IDivokaKarta {
+public class KartaDivokaTahajStyri extends Karta {
     public KartaDivokaTahajStyri(int x, int y) {
         super(x, y, Color.gray, Znak.KARTA_TAHAJ_STYRI);
     }
@@ -31,7 +31,6 @@ public class KartaDivokaTahajStyri extends Karta implements IDivokaKarta {
         super.vykresli();
     }
 
-    @Override
     public boolean vyberSiFarbu() {
         //Polymorfizmus Interface
         String[] moznosti = {"Cervena", "Zelena", "Modra", "Zlta"};

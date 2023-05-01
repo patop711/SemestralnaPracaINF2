@@ -6,7 +6,7 @@ import sk.uniza.fri.shapesge.Rectangle;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 
-public class KartaDivoka extends Karta implements IDivokaKarta {
+public class KartaDivoka extends Karta {
 
     public KartaDivoka(int x, int y) {
         super(x, y, Color.gray, Znak.KARTA_DIVOKA);
@@ -32,7 +32,6 @@ public class KartaDivoka extends Karta implements IDivokaKarta {
         super.vykresli();
     }
 
-    @Override
     public boolean vyberSiFarbu() {
         //Polymorfizmus Interface
         String[] moznosti = {"Cervena", "Zelena", "Modra", "Zlta"};
