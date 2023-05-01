@@ -61,7 +61,6 @@ public class KartaDivoka extends Karta {
     public boolean vykonajAkciu(Hrac hrac) {
         //Tu je polymorfizmus
         this.vyberSiFarbu();
-        hrac.getHra().dalsiHrac();
         return true;
     }
 

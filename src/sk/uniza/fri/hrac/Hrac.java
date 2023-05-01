@@ -109,7 +109,7 @@ public class Hrac {
                     int predchazdajuceY = kartaVRuke.getVonkajsiaVrstva().getY();
                     kartaVRuke.zmenPoziciu(predchazdajuceX - 88, predchazdajuceY);
                 }
-                //this.getHra().dalsiHrac();
+                this.getHra().dalsiHrac();
             }
         }
     }

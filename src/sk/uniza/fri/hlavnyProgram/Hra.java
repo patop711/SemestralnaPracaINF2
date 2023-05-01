@@ -50,8 +50,11 @@ public class Hra {
      * Pridá hráčovi karty
      * @param kolkoKariet - kolko kariet má dostať hrac
      */
-    public void dajHracoviKartyPodlaPoctu(int kolkoKariet) {
-        //this.dalsiHrac();
+    public void dajHracoviKartyPodlaPoctu(int kolkoKariet, boolean jeToPreDalsiehoHraca) {
+        //Ako vyriesim to ked si hrac chce zobrat iba kartu ale zaroven tuto metodu pouzivaju karty Tahaj 4 a tahaj 2
+        if (jeToPreDalsiehoHraca) {
+            this.dalsiHrac();
+        }
         for (int i = 0; i < kolkoKariet; i++) {
             Karta novaKarta = this.getBalicekKariet().get(0);
             if (this.getHracNaTahu().zoberKartu(novaKarta)) {
@@ -59,7 +62,9 @@ public class Hra {
                 System.out.println(novaKarta.toString());
             }
         }
-        this.dalsiHrac();
+        if (!jeToPreDalsiehoHraca) {
+            this.dalsiHrac();
+        }
     }
 
     public void setPoSmereHodinovychRuciciek(boolean poSmereHodinovychRuciciek) {
