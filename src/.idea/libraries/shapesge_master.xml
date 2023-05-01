@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="shapesge-master">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../shapesge-master" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../shapesge-master/shapesge-master/example/src" />
+      <root url="file://$PROJECT_DIR$/../../../shapesge-master/shapesge-master/src/main/java" />
+    </SOURCES>
+  </library>
+</component>
