@@ -31,6 +31,7 @@ public class KartaTahajDve extends Karta {
             hrac.getHra().dajHracoviKartyPodlaPoctu(2);
             return true;
         }
+        System.out.println("Kartu nie je mozne polozit");
         return false;
     }
 

@@ -60,7 +60,7 @@ public class KartaDivokaTahajStyri extends Karta {
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Ked je tato karta pouzita, tak sa preskoci na dalsieho hraca, ktorý si musí tahať 4 karty a
-        // tým pádom stratí možnosť byť na rade a ide na dalsieho hraca
+        //tým pádom stratí možnosť byť na rade a ide na dalsieho hraca
         this.vyberSiFarbu();
         hrac.getHra().dajHracoviKartyPodlaPoctu(4);
         return true;

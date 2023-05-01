@@ -26,7 +26,7 @@ public class KartaOtocit extends Karta {
 
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
-        //Tu sa deje polymorfizmus
+        //Polymorfizmus
         if (hrac.getHra().getBalicekPouzitychKariet().get(hrac.getHra().getBalicekPouzitychKariet().size() - 1).getFarba() == this.getFarba() ||
             hrac.getHra().getBalicekPouzitychKariet().get(hrac.getHra().getBalicekPouzitychKariet().size() - 1).getZnak() == this.getZnak()) {
 

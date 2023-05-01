@@ -9,7 +9,6 @@ import sk.uniza.fri.karty.KartaPreskocit;
 import sk.uniza.fri.karty.KartaTahajDve;
 import sk.uniza.fri.karty.KartaDivokaTahajStyri;
 import sk.uniza.fri.karty.Znak;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,6 +46,10 @@ public class Hra {
 
     }
 
+    /**
+     * Pridá hráčovi karty
+     * @param kolkoKariet - kolko kariet má dostať hrac
+     */
     public void dajHracoviKartyPodlaPoctu(int kolkoKariet) {
         this.dalsiHrac();
         for (int i = 0; i < kolkoKariet; i++) {
@@ -156,26 +159,6 @@ public class Hra {
             }
         }
     }
-//    public boolean pridajHraca(Hrac hrac) {
-//        var pocetPridanychHracov = this.getHraci().size();
-//        if (pocetPridanychHracov <= this.pocetHracov) {
-//            if (pocetPridanychHracov == 1) {
-//                if (this.getHraci().get(pocetPridanychHracov - 1).getMenoHraca().getX() == hrac.getMenoHraca().getX() &&
-//                        this.getHraci().get(pocetPridanychHracov - 1).getMenoHraca().getY() == hrac.getMenoHraca().getY()) {
-//                    hrac.getMenoHraca().setY(850);
-//                }
-//            } else if (pocetPridanychHracov == 2) {
-//                hrac.setPoziciaMenoHraca(this.getHraci().get(pocetPridanychHracov - 1).getMenoHraca().getX() + 850, hrac.getMenoHraca().getY());
-//            } else if (pocetPridanychHracov == 3) {
-//                hrac.setPoziciaMenoHraca(this.getHraci().get(pocetPridanychHracov - 2).getMenoHraca().getX() + 850, this.getHraci().get(pocetPridanychHracov - 2).getMenoHraca().getY());
-//            }
-//            this.hraci.add(hrac);
-//            return true;
-//        }
-//        System.out.println("Viac hracov nejde pridať");
-//        return false;
-//    }
-
 
     /**
      * Metoda na vytvorenie všetkých 108 kariet UNO
@@ -277,58 +260,21 @@ public class Hra {
         }
     }
 
-
-//    public void dalsiHrac() {
-//        if (this.getHracNaTahu() == null) {
-//            this.hracNaTahu = this.getHraci().get(0);
-//        } else {
-//            int indexDalsiehoHraca;
-//
-//            if (this.poSmereHodinovychRuciciek) {
-//                indexDalsiehoHraca = this.getHraci().indexOf(this.getHracNaTahu()) + 1;
-//
-//                if (indexDalsiehoHraca >= this.getHraci().size()) {
-//                    indexDalsiehoHraca = 0;
-//                }
-//            } else {
-//                indexDalsiehoHraca = this.getHraci().indexOf(this.getHracNaTahu()) - 1;
-//
-//                if (indexDalsiehoHraca < 0) {
-//                    indexDalsiehoHraca = this.getHraci().size() - 1;
-//                }
-//            }
-//
-//            this.hracNaTahu = this.getHraci().get(indexDalsiehoHraca);
-//            this.skryKartyHracov();
-//            System.out.println("Teraz je na rade " + this.getHracNaTahu().getMeno());
-//        }
-//    }
-//
-//
-//    public void skryKartyHracov() {
-//        for (Hrac hrac : this.getHraci()) {
-//            if (hrac != this.getHracNaTahu()) {
-//                hrac.otocMojeKarty();
-//            }
-//
-//        }
-//    }
-
     public void dalsiHrac() {
         int indexDalsiehoHraca;
 
         if (this.poSmereHodinovychRuciciek) {
             // ak sa hraje po smere hodinových ručičiek, získa sa index ďalšieho hráča tak,
-            // že sa ku indexu aktuálneho hráča pripočíta 1
+            // že sa ku indexu aktuálneho hráča pripočíta +1
             indexDalsiehoHraca = this.getHraci().indexOf(this.getHracNaTahu()) + 1;
 
             if (indexDalsiehoHraca >= this.getHraci().size()) {
-                // ak je index väčší alebo rovný počtu hráčov, nastaví sa na prvý hráč
+                // ak je index väčší alebo rovný počtu hráčov, nastaví sa na prvého hráč
                 indexDalsiehoHraca = 0;
             }
         } else {
             // ak sa hraje proti smeru hodinových ručičiek, získa sa index ďalšieho hráča tak,
-            // že sa od indexu aktuálneho hráča odráta 1
+            // že sa od indexu aktuálneho hráča odráta -1
             indexDalsiehoHraca = this.getHraci().indexOf(this.getHracNaTahu()) - 1;
 
             if (indexDalsiehoHraca < 0) {
@@ -336,7 +282,6 @@ public class Hra {
                 indexDalsiehoHraca = this.getHraci().size() - 1;
             }
         }
-
         // nastaví sa hráč na ťahu na ďalšieho hráča
         this.hracNaTahu = this.getHraci().get(indexDalsiehoHraca);
         // skryjú sa karty všetkých hráčov okrem hráča na ťahu
@@ -353,13 +298,6 @@ public class Hra {
                 // zobrazia sa karty hráča na ťahu
                 hrac.zobrazKarty();
             }
-        }
-    }
-
-    public void zobrazVsetkyKartyHracov() {
-        for (Hrac hrac : this.getHraci()) {
-            // zobrazia sa všetky karty hráč
-            hrac.zobrazKarty();
         }
     }
 
@@ -397,45 +335,4 @@ public class Hra {
 
     }
 
-    public static void main(String[] args) {
-        Hra hra = new Hra(4);
-        Hrac hrac = new Hrac("Patrik", hra);
-        Hrac hrac1 = new Hrac("Dominik", hra);
-        Hrac hrac2 = new Hrac("Palo", hra);
-        Hrac hrac3 = new Hrac("Janka", hra);
-        hra.pridajHraca(hrac);
-        hra.pridajHraca(hrac1);
-        hra.pridajHraca(hrac2);
-        hra.pridajHraca(hrac3);
-        //hra.hlavnyLoop();
-        //hra.dalsiHrac();
-//        hra.dalsiHrac();
-//        hra.dalsiHrac();
-//        hra.dalsiHrac();
-        //hra.dajHracoviKartyPodlaPoctu(4);
-
-        hra.getBalicekKariet().add(new KartaNormalna(-100, -100, Color.BLUE, Znak.KARTA_JEDEN));
-        hra.getBalicekKariet().add(new KartaNormalna(-100, -100, Color.BLUE, Znak.KARTA_JEDEN));
-        hra.getBalicekKariet().add(new KartaNormalna(-100, -100, Color.BLUE, Znak.KARTA_JEDEN));
-        hra.getBalicekKariet().add(new KartaNormalna(-100, -100, Color.BLUE, Znak.KARTA_JEDEN));
-        hra.getBalicekKariet().add(new KartaNormalna(-100, -100, Color.BLUE, Znak.KARTA_JEDEN));
-        hra.getBalicekKariet().add(new KartaNormalna(-100, -100, Color.BLUE, Znak.KARTA_JEDEN));
-        hra.getBalicekPouzitychKariet().add(new KartaNormalna(0, 0, Color.MAGENTA, Znak.KARTA_JEDEN));
-        //hrac.zoberKartu(new KartaDivoka(-100, -100));
-        //hrac.zoberKartu(new KartaDivokaTahajStyri(0, 0));
-//        hrac2.zoberKartu(new KartaOtocit(-100, -100, Color.MAGENTA));
-//        hrac2.zoberKartu(new KartaDivokaTahajStyri(0, 0));
-        hrac.pouziKartu(hrac.getMojeKarty().get(0));
-        //hrac.pouziKartu(hrac.getMojeKarty().get(0));
-//        hrac2.pouziKartu(hrac.getMojeKarty().get(0));
-//        hrac2.pouziKartu(hrac.getMojeKarty().get(0));
-        //System.out.println(hra.getBalicekPouzitychKariet().get(hra.getBalicekPouzitychKariet().size() - 1).getZnak() + " 1 karta");
-        //hrac.pouziKartu(hrac.getMojeKarty().get(0));
-        //System.out.println(hra.getBalicekPouzitychKariet().get(hra.getBalicekPouzitychKariet().size() - 1).getZnak() + " 2 karta");
-        //hra.getHraci().get(1).setPoziciaMenoHraca(hra.getHraci().get(0).getMenoHraca().getX(), hra.getHraci().get(0).getMenoHraca().getY() + 400);
-
-        //hra.getHraci().get(2).setPoziciaMenoHraca(hra.getHraci().get(0).getMenoHraca().getX(), hra.getHraci().get(0).getMenoHraca().getY() + 270);
-
-        System.out.println(hra.getBalicekPouzitychKariet().size());
-    }
 }

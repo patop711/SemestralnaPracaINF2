@@ -26,6 +26,7 @@ public class KartaNormalna extends Karta {
         //Ak máme takú istú farbu alebo znak našej karty, tak sa použije
         if (hrac.getHra().getBalicekPouzitychKariet().get(hrac.getHra().getBalicekPouzitychKariet().size() - 1).getFarba() == this.getFarba() ||
             hrac.getHra().getBalicekPouzitychKariet().get(hrac.getHra().getBalicekPouzitychKariet().size() - 1).getZnak() == this.getZnak()) {
+
             return true;
         } else {
             System.out.println("Kartu nie je možné položiť!!!");

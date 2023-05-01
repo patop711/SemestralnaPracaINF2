@@ -115,23 +115,9 @@ public class Hrac {
     }
 
     public void zoradKartyPodlaFarby() {
-        //TODO treba zoradit karty podla farby
+        //TODO treba zoradit karty podla farby (neviem ako to spravit 😥)
     }
 
-
-//    public void zoberKartu(Karta karta) {
-//        if (this.getMojeKarty().isEmpty()) {
-//            Karta prvaKarta = karta;
-//            prvaKarta.zmenPoziciu(720, 320);
-//            this.getMojeKarty().add(prvaKarta);
-//        } else {
-//            Karta novaKarta = karta;
-//            novaKarta.zmenPoziciu(getMojeKarty().get(getMojeKarty().size() - 1).getVonkajsiaVrstva().getX(),getMojeKarty().get(getMojeKarty().size() - 1).getVonkajsiaVrstva().getY());
-//            getMojeKarty().get(getMojeKarty().size() - 1).zmenPoziciu(getMojeKarty().get(getMojeKarty().size() - 1).getVonkajsiaVrstva().getX() - 88,getMojeKarty().get(getMojeKarty().size() - 1).getVonkajsiaVrstva().getY());
-//            this.getMojeKarty().add(novaKarta);
-//        }
-//        System.out.println("Karta bola pridaná pre hraca menom " + getMeno() + " " + getMojeKarty().size());
-//    }
 
     /**
      * Metoda ktorá zoberie kartu z balicka kariet (ArrayList) z triedy hra a pridá ich hráčovi do ruky pričom sa usporiadajú aby neboli všetky na tej istej
@@ -139,8 +125,6 @@ public class Hrac {
      *
      * @param karta - karta ktorú ideme vložit do hráčovej ruky(ArrayList)
      */
-    //TODO Zabezpeciť aby boli karty zoradene podla farby (a možno čísla ak sa to bude dať) -
-    // skôr samostatna metoda ktorú budem volať pri tejto metode a metode pouzi kartu
     public boolean zoberKartu(Karta karta) {
         var vysledok = false;
         if (this.getMojeKarty().isEmpty()) {
@@ -173,26 +157,4 @@ public class Hrac {
 
         }
     }
-
-
-//    public static void main(String[] args) {
-//        String meno = "Patrik";
-//
-//        Hrac hrac = new Hrac(meno.toUpperCase());
-//        hrac.setPoziciaMenoHraca(10, 600);
-//        hrac.getMenoHraca().makeVisible();
-//        KartaOtocit kartaOtocit = new KartaOtocit(0, 0, Color.orange);
-//        KartaPreskocit kartaPreskocit = new KartaPreskocit(0, 0, Color.MAGENTA);
-//        KartaDivoka kartaDivoka = new KartaDivoka(0, 0);
-//        KartaNormalna kartaNormalna = new KartaNormalna(0, 0, Color.BLUE, Znak.KARTA_JEDEN);
-//        KartaDivoka kartaDivoka1 = new KartaDivoka(-10, -100);
-//        hrac.zoberKartu(kartaOtocit);
-//        hrac.zoberKartu(kartaPreskocit);
-//        hrac.zoberKartu(kartaDivoka);
-//        hrac.zoberKartu(kartaNormalna);
-//        hrac.pouziKartu(kartaPreskocit);
-//        hrac.pouziKartu(kartaOtocit);
-//        hrac.pouziKartu(kartaDivoka1);
-//        //hrac.otocMojeKarty();
-//    }
 }

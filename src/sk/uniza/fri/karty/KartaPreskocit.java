@@ -31,7 +31,6 @@ public class KartaPreskocit extends Karta {
 
             hrac.getHra().dalsiHrac();
             return true;
-
         }
         System.out.println("Kartu nie je mozne polozit");
         return false;
