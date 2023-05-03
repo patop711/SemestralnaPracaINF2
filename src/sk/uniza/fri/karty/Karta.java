@@ -5,6 +5,7 @@ import sk.uniza.fri.shapesge.Ellipse;
 import sk.uniza.fri.shapesge.Rectangle;
 import sk.uniza.fri.shapesge.Text;
 
+import javax.swing.*;
 import java.awt.Color;
 
 public abstract class Karta {
@@ -251,5 +252,30 @@ public abstract class Karta {
         this.farba = novaFarba;
     }
 
+    public boolean vyberSiFarbu() {
+        //Polymorfizmus
+        String[] moznosti = {"Cervena", "Zelena", "Modra", "Zlta"};
+        int vysledok = JOptionPane.showOptionDialog(null, "Vyber farbu karty", "Farba karty", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE, null, moznosti, moznosti[0]);
+        switch (vysledok) {
+            case 0 -> {
+                this.getVnutornaVrstva().changeColor("red");
+                this.setFarba(Color.red);
+            }
+            case 1 -> {
+                this.getVnutornaVrstva().changeColor("green");
+                this.setFarba(Color.green);
+            }
+            case 2 -> {
+                this.getVnutornaVrstva().changeColor("blue");
+                this.setFarba(Color.blue);
+            }
+            case 3 -> {
+                this.getVnutornaVrstva().changeColor("yellow");
+                this.setFarba(Color.yellow);
+            }
+        }
+        return true;
+    }
 
 }

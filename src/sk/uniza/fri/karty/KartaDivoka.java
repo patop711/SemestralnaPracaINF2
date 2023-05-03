@@ -31,29 +31,9 @@ public class KartaDivoka extends Karta {
         super.vykresli();
     }
 
+    @Override
     public boolean vyberSiFarbu() {
-        //Polymorfizmus Interface
-        String[] moznosti = {"Cervena", "Zelena", "Modra", "Zlta"};
-        int vysledok = JOptionPane.showOptionDialog(null, "Vyber farbu karty", "Farba karty", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE, null, moznosti, moznosti[0]);
-        switch (vysledok) {
-            case 0 -> {
-                this.getVnutornaVrstva().changeColor("red");
-                super.setFarba(Color.red);
-            }
-            case 1 -> {
-                this.getVnutornaVrstva().changeColor("green");
-                super.setFarba(Color.green);
-            }
-            case 2 -> {
-                this.getVnutornaVrstva().changeColor("blue");
-                super.setFarba(Color.blue);
-            }
-            case 3 -> {
-                this.getVnutornaVrstva().changeColor("yellow");
-                super.setFarba(Color.yellow);
-            }
-        }
+        super.vyberSiFarbu();
         return true;
     }
 
