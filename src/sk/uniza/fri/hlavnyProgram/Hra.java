@@ -9,6 +9,8 @@ import sk.uniza.fri.karty.KartaPreskocit;
 import sk.uniza.fri.karty.KartaTahajDve;
 import sk.uniza.fri.karty.KartaDivokaTahajStyri;
 import sk.uniza.fri.karty.Znak;
+
+import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,6 +50,7 @@ public class Hra {
 
     /**
      * Pridá hráčovi karty
+     *
      * @param kolkoKariet - kolko kariet má dostať hrac
      */
     public void dajHracoviKartyPodlaPoctu(int kolkoKariet, boolean jeToPreDalsiehoHraca) {
@@ -213,20 +216,36 @@ public class Hra {
      * Metoda pomocou ktorej sa zacne hra
      */
     public void zacatHru() {
-        this.vytvorKarty();
-        this.pomiesajKarty();
-        this.rozdajKarty();
-        this.skryKartyHracov(this.getHracNaTahu());
-        //TODO Ked kliknem na kartu balicek tak tomu hracovi co je na rade sa pridá karta - !!!Zatiaľ nevyriešené!!!😒
-        Karta kartaBalicek = new KartaNormalna(40, 400, Color.ORANGE, Znak.KARTA_BALICEK);
+        Object[] moznosti = {"Áno, chem hrať 😄", "Nie, necítim sa na to 😒"};
+        int n = JOptionPane.showOptionDialog(null, "Uno je kartová hra, ktorá sa hrá so štandardným balíčkom 108 kariet. Hra sa zvyčajne hrá s 2 až 10 hráčmi a cieľom hry je zbaviť sa všetkých svojich kariet.\n" +
+                "\n" +
+                "Hráči dostanú na začiatku hry 7 kariet, ktoré si vezmú do svojej ruky. Zvyšok balíčka sa umiestni na stôl, pričom sa otočí jedna karta a umiestni sa vedľa neho, aby sa vytvoril odhodený balíček.\n" +
+                "\n" +
+                "Hráč, ktorý je na rade, položí na odhodený balíček kartu, ktorá má buď rovnaké číslo alebo farbu ako karta na vrchu odhodeného balíčka. Ak hráč nemá vhodnú kartu, musí si ťahať jednu kartu zo zvyšku balíčka.\n" +
+                "\n" +
+                "Okrem toho existujú špeciálne karty, ktoré môžu hráči použiť na zmenu farby, ťahy alebo na prinútenie súpera ťahať karty. Tieto karty zahŕňajú Wild karty, ktoré umožňujú hráčovi zmeniť farbu karty na ktorúkoľvek farbu a Wild Draw Four karty, ktoré prinútia súpera ťahať štyri karty a zmeniť farbu karty.\n" +
+                "\n" +
+                "Prvý hráč, ktorý sa zbaví všetkých svojich kariet, vyhráva hru. Ak hráč nevie alebo nechce položiť žiadnu kartu, musí si ťahať karty, až kým nebudú môcť položiť vhodnú kartu.\n" +
+                "\n" +
+                "Toto sú základné pravidlá hry Uno. Pevne dúfam, že ti pomôžu začať hrať a užiť si túto skvelú kartovú hru!", "UNO", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, moznosti, moznosti[0]);
+        if (n == 0) {
+            this.vytvorKarty();
+            this.pomiesajKarty();
+            this.rozdajKarty();
+            this.skryKartyHracov(this.getHracNaTahu());
+            //TODO Ked kliknem na kartu balicek tak tomu hracovi co je na rade sa pridá karta - !!!Zatiaľ nevyriešené!!!😒
+            Karta kartaBalicek = new KartaNormalna(40, 400, Color.ORANGE, Znak.KARTA_BALICEK);
 
-        //Ked rozdá karty tak vlozi do pouzitých jednu kartu
-        var kartaNaZaciatok = this.getBalicekKariet().get(this.getBalicekKariet().size() - 1);
-        kartaNaZaciatok.zmenPoziciu((1920 / 2), 400);
-        kartaNaZaciatok.vykresli();
-        this.getBalicekPouzitychKariet().add(kartaNaZaciatok);
-        this.getBalicekKariet().remove(kartaNaZaciatok);
+            //Ked rozdá karty tak vlozi do pouzitých jednu kartu
+            var kartaNaZaciatok = this.getBalicekKariet().get(this.getBalicekKariet().size() - 1);
+            kartaNaZaciatok.zmenPoziciu((1920 / 2), 400);
+            kartaNaZaciatok.vykresli();
+            this.getBalicekPouzitychKariet().add(kartaNaZaciatok);
+            this.getBalicekKariet().remove(kartaNaZaciatok);
 
+        } else {
+            System.exit(0);
+        }
     }
 
     /**
@@ -319,11 +338,14 @@ public class Hra {
             case "p": //vyber karty
                 boolean vyber = false;
                 while (!vyber) {
-                    System.out.println("Zadaj ktoru kartuc chces pouzit: ");
+                    System.out.println("Zadaj ktoru kartu chces pouzit: ");
                     int karta = scanner.nextInt();
                     this.getHracNaTahu().pouziKartu(this.getHracNaTahu().getMojeKarty().get((karta - 1)));
                     vyber = true;
                 }
+                break;
+            case "k":
+                this.hracNaTahu.potiahniSiKartu();
                 break;
             case "e": //koniec
                 System.out.println("Maj sa krásne!");

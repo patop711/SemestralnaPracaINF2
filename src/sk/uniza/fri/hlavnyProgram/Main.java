@@ -9,8 +9,8 @@ public class Main {
         Hra hra = new Hra(4);
         hra.zacatHru();
         Hrac hrac1 = new Hrac("Patrik", hra);
-        Hrac hrac2 = new Hrac("Dominik", hra);
-        Hrac hrac3 = new Hrac("Katarína", hra);
+        Hrac hrac2 = new Hrac("Lukáš", hra);
+        Hrac hrac3 = new Hrac("Katarina", hra);
         Hrac hrac4 = new Hrac("Dáša", hra);
         hra.pridajHraca(hrac1);
         hra.pridajHraca(hrac2);

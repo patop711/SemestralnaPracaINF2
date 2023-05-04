@@ -126,7 +126,7 @@ public class Hrac {
      * @param karta - karta ktorú ideme vložit do hráčovej ruky(ArrayList)
      */
     public boolean zoberKartu(Karta karta) {
-        var vysledok = false;
+        boolean vysledok = false;
         if (this.getMojeKarty().isEmpty()) {
             Karta prvaKarta = karta;
             prvaKarta.zmenPoziciu(this.getMenoHraca().getX() + 110, this.getMenoHraca().getY());
@@ -138,7 +138,12 @@ public class Hrac {
 
             if (this.getMojeKarty().size() < 14) {
                 this.getMojeKarty().add(novaKarta);
-                novaKarta.zmenPoziciu(poslednaKarta.getVonkajsiaVrstva().getX() + 88, poslednaKarta.getVonkajsiaVrstva().getY());
+                if ((this.getMojeKarty().size() - 1) == 7) {
+                    Karta prvaKarta = this.getMojeKarty().get(0);
+                    novaKarta.zmenPoziciu(prvaKarta.getVonkajsiaVrstva().getX(), prvaKarta.getVonkajsiaVrstva().getY() + 125);
+                } else {
+                    novaKarta.zmenPoziciu(poslednaKarta.getVonkajsiaVrstva().getX() + 88, poslednaKarta.getVonkajsiaVrstva().getY());
+                }
                 vysledok = true;
             } else {
                 System.out.println("Hrac ma maximum kariet!");
@@ -146,6 +151,11 @@ public class Hrac {
             }
         }
         return vysledok;
+    }
+
+
+    public void potiahniSiKartu() {
+        this.getHra().dajHracoviKartyPodlaPoctu(1, false);
     }
 
     /**
