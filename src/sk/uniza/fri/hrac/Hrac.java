@@ -5,6 +5,7 @@ import sk.uniza.fri.karty.Karta;
 import sk.uniza.fri.shapesge.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hrac {
     private final String meno;
@@ -93,26 +94,35 @@ public class Hrac {
      */
     //TODO zabezpečiť aby sa odstranene karty dali do ArrayListu pouziteKarty v triede hra - OK
     public void pouziKartu(Karta karta) {
-        if (this.getMojeKarty().contains(karta)) {
-
+        List<Karta> karty = this.getMojeKarty();
+        if (karty.contains(karta)) {
             if (karta.vykonajAkciu(this)) {
                 int indexKartyNaOdstranenie = this.getMojeKarty().indexOf(karta);
-                //karta.skrySa();
-                this.getMojeKarty().remove(indexKartyNaOdstranenie);
-
+                karty.remove(indexKartyNaOdstranenie);
                 this.getHra().pridajPouzituKartu(karta);
-
-                // Po pouziti karty, ostatne karty zmenia pozíciu
-                for (int i = indexKartyNaOdstranenie; i < this.getMojeKarty().size(); i++) {
-                    Karta kartaVRuke = this.getMojeKarty().get(i);
-                    int predchazdajuceX = kartaVRuke.getVonkajsiaVrstva().getX();
-                    int predchazdajuceY = kartaVRuke.getVonkajsiaVrstva().getY();
-                    kartaVRuke.zmenPoziciu(predchazdajuceX - 88, predchazdajuceY);
-                }
+                this.aktualizujPozicieKariet();
                 this.getHra().dalsiHrac();
             }
         }
     }
+
+    private void aktualizujPozicieKariet() {
+        List<Karta> karty = this.getMojeKarty();
+        int startX = this.getMenoHraca().getX() + 110;
+        int startY = this.getMenoHraca().getY();
+        int i = 0;
+        for (Karta kartaVRuke : karty) {
+            int x = startX + (i * 88);
+            int y = startY;
+            if (i >= 7) {
+                x -= 7 * 88;
+                y += 125;
+            }
+            kartaVRuke.zmenPoziciu(x, y);
+            i++;
+        }
+    }
+
 
     public void zoradKartyPodlaFarby() {
         //TODO treba zoradit karty podla farby (neviem ako to spravit 😥)
@@ -127,6 +137,7 @@ public class Hrac {
      */
     public boolean zoberKartu(Karta karta) {
         boolean vysledok = false;
+        var pocetKariet = this.getMojeKarty().size() - 1;
         if (this.getMojeKarty().isEmpty()) {
             Karta prvaKarta = karta;
             prvaKarta.zmenPoziciu(this.getMenoHraca().getX() + 110, this.getMenoHraca().getY());
@@ -134,24 +145,36 @@ public class Hrac {
             vysledok = true;
         } else {
             Karta novaKarta = karta;
-            Karta poslednaKarta = this.getMojeKarty().get(this.getMojeKarty().size() - 1);
 
-            if (this.getMojeKarty().size() < 14) {
+            if (pocetKariet < 14) {
                 this.getMojeKarty().add(novaKarta);
-                if ((this.getMojeKarty().size() - 1) == 7) {
-                    Karta prvaKarta = this.getMojeKarty().get(0);
-                    novaKarta.zmenPoziciu(prvaKarta.getVonkajsiaVrstva().getX(), prvaKarta.getVonkajsiaVrstva().getY() + 125);
-                } else {
-                    novaKarta.zmenPoziciu(poslednaKarta.getVonkajsiaVrstva().getX() + 88, poslednaKarta.getVonkajsiaVrstva().getY());
-                }
                 vysledok = true;
             } else {
                 System.out.println("Hrac ma maximum kariet!");
-                vysledok = false;
             }
         }
+
+        if (vysledok) {
+            this.aktualizujPozicieKariet();
+        }
+
         return vysledok;
     }
+
+//    private void upravPozicieKarietVRuke() {
+//        int startX = this.getMenoHraca().getX() + 110;
+//        int startY = this.getMenoHraca().getY();
+//        for (int i = 0; i < this.getMojeKarty().size(); i++) {
+//            Karta kartaVRuke = this.getMojeKarty().get(i);
+//            int x = startX + (i * 88);
+//            int y = startY;
+//            if (i >= 7) {
+//                x -= 7 * 88;
+//                y += 125;
+//            }
+//            kartaVRuke.zmenPoziciu(x, y);
+//        }
+//    }
 
 
     public void potiahniSiKartu() {
