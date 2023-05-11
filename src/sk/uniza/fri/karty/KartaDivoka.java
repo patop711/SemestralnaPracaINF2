@@ -37,14 +37,16 @@ public class KartaDivoka extends Karta {
     }
 
     @Override
+    public void zmenPoziciu(int x, int y) {
+        super.zmenPoziciu(x, y);
+    }
+
+    @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Tu je polymorfizmus
         this.vyberSiFarbu();
         return true;
     }
 
-    @Override
-    public void zmenPoziciu(int x, int y) {
-        super.zmenPoziciu(x, y);
-    }
+
 }

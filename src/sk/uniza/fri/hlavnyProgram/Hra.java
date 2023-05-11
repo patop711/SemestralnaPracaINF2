@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class Hra {
@@ -268,7 +267,7 @@ public class Hra {
     }
 
     /**
-     * Metóda ktorá na začiatku hry rozdá hráčom karty (7(čo je vlastne maximum) kariet pre každeho)
+     * Metóda ktorá na začiatku hry rozdá hráčom karty 7 kariet pre každeho)
      */
     private void rozdajKarty() {
         int index = 0;
@@ -310,7 +309,7 @@ public class Hra {
         predchadzajuciHraci.add(this.getHracNaTahu());
         for (Hrac hrac : predchadzajuciHraci) {
             if (hrac.getMojeKarty().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Vyhral: " + this.hracNaTahu.getMeno() + " !", "Koniec hry", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Vyhral: " + hrac.getMeno() + " !", "Koniec hry", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
                 predchadzajuciHraci.clear();
                 return;
@@ -364,9 +363,21 @@ public class Hra {
     }
 
     public void pouziKartu() {
-        String cisloKarty = JOptionPane.showInputDialog(null, "Zadaj cislo od 1 po " + this.hracNaTahu.getMojeKarty().size() + "\nZadaj ktoru kartu chces pouzit:");
-        int karta = Integer.parseInt(cisloKarty);
-        this.getHracNaTahu().pouziKartu(this.getHracNaTahu().getMojeKarty().get((karta - 1)));
+        boolean vysledok = false;
+        while (!vysledok) {
+            String cisloKarty = JOptionPane.showInputDialog(null, "Zadaj cislo od 1 po " + this.hracNaTahu.getMojeKarty().size() + "\nZadaj ktoru kartu chces pouzit:");
+            try {
+                int karta = Integer.parseInt(cisloKarty);
+                this.getHracNaTahu().pouziKartu(this.getHracNaTahu().getMojeKarty().get((karta - 1)));
+                vysledok = true;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Zadal si zly vstup, musis zadat cislo od 1 po " + this.hracNaTahu.getMojeKarty().size());
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Nieco sa pokazilo, zatvor program a skus znova");
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(null, "Zadal si zly vstup, musis zadat cislo od 1 po " + this.hracNaTahu.getMojeKarty().size());
+            }
+        }
     }
 
     public void potiahniKartu() {
@@ -374,7 +385,7 @@ public class Hra {
     }
 
     public void pomocka() {
-        JOptionPane.showMessageDialog(null, "Skuska...1,2,3 :D");
+        JOptionPane.showMessageDialog(null, "Ovládanie:\nKlávesa Q -> Použitie karty\nKlávesa W -> potiahnutie karty\nKlávesa E -> ukončenie hry");
     }
 
     public void exit() {

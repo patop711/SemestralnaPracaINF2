@@ -84,6 +84,30 @@ public class Hrac {
     public ArrayList<Karta> getMojeKarty() {
         return this.mojeKarty;
     }
+
+    private void aktualizujPozicieKariet() {
+        List<Karta> karty = this.getMojeKarty();
+        int startX = this.getMenoHraca().getX() + 110;
+        int startY = this.getMenoHraca().getY();
+        int i = 0;
+        for (Karta kartaVRuke : karty) {
+            int x = startX + (i * 88);
+            int y = startY;
+            if (i >= 7) {
+                x -= 7 * 88;
+                y += 125;
+            }
+            kartaVRuke.zmenPoziciu(x, y);
+            i++;
+        }
+    }
+    /**
+     * Metóda pomocou ktorej si hráč potiahne kartu z balíčka kariet
+     */
+    public void potiahniSiKartu() {
+        this.getHra().dajHracoviKartyPodlaPoctu(1, false);
+    }
+
     /**
      * Metóda ktorá použije kartu z hráčovej ruky a následne ju vymaže z ArrayListu a zoradí karty
      *
@@ -102,22 +126,6 @@ public class Hrac {
             } else {
                 JOptionPane.showMessageDialog(null, "Túto kartu nie je možné položíť\nProsím vyber si inú kartu", "Výsledok použitia karty", JOptionPane.WARNING_MESSAGE);
             }
-        }
-    }
-    private void aktualizujPozicieKariet() {
-        List<Karta> karty = this.getMojeKarty();
-        int startX = this.getMenoHraca().getX() + 110;
-        int startY = this.getMenoHraca().getY();
-        int i = 0;
-        for (Karta kartaVRuke : karty) {
-            int x = startX + (i * 88);
-            int y = startY;
-            if (i >= 7) {
-                x -= 7 * 88;
-                y += 125;
-            }
-            kartaVRuke.zmenPoziciu(x, y);
-            i++;
         }
     }
 
@@ -151,11 +159,5 @@ public class Hrac {
         }
 
         return vysledok;
-    }
-    /**
-     * Metóda pomocou ktorej si hráč potiahne kartu z balíčka kariet
-     */
-    public void potiahniSiKartu() {
-        this.getHra().dajHracoviKartyPodlaPoctu(1, false);
     }
 }
