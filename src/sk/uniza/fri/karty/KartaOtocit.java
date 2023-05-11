@@ -27,18 +27,17 @@ public class KartaOtocit extends Karta {
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Polymorfizmus
-        if (hrac.getHra().getBalicekPouzitychKariet().get(hrac.getHra().getBalicekPouzitychKariet().size() - 1).getFarba() == this.getFarba() ||
-            hrac.getHra().getBalicekPouzitychKariet().get(hrac.getHra().getBalicekPouzitychKariet().size() - 1).getZnak() == this.getZnak()) {
+        var predchazdajucaKarta = hrac.getHra().getBalicekPouzitychKariet().size() - 1;
+        if (hrac.getHra().getBalicekPouzitychKariet().get(predchazdajucaKarta).getFarba() == this.getFarba() ||
+            hrac.getHra().getBalicekPouzitychKariet().get(predchazdajucaKarta).getZnak() == this.getZnak()) {
 
-            if (hrac.getHra().getPoSmereHodinovychRuciciek()) {
+            if (hrac.getHra().jePoSmereHodinovychRuciciek()) {
                 hrac.getHra().setPoSmereHodinovychRuciciek(false);
-                return true;
             } else {
                 hrac.getHra().setPoSmereHodinovychRuciciek(true);
-                return true;
             }
+            return true;
         } else {
-            System.out.println("Kartu nie je mozne polozit");
             return false;
         }
     }

@@ -3,36 +3,42 @@ package sk.uniza.fri.hlavnyProgram;
 import sk.uniza.fri.hrac.Hrac;
 import sk.uniza.fri.karty.Karta;
 import sk.uniza.fri.karty.KartaDivoka;
+import sk.uniza.fri.karty.KartaDivokaTahajStyri;
 import sk.uniza.fri.karty.KartaNormalna;
 import sk.uniza.fri.karty.KartaOtocit;
 import sk.uniza.fri.karty.KartaPreskocit;
 import sk.uniza.fri.karty.KartaTahajDve;
-import sk.uniza.fri.karty.KartaDivokaTahajStyri;
 import sk.uniza.fri.karty.Znak;
+import sk.uniza.fri.shapesge.Manager;
+import sk.uniza.fri.shapesge.Text;
 
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
+import java.util.List;
+import java.util.Random;
 
 public class Hra {
     private final ArrayList<Karta> balicekKariet;
     private final ArrayList<Karta> balicekPouzitychKariet;
     private final ArrayList<Hrac> hraci;
     private final int pocetHracov;
-    private boolean padloUno;
     private boolean poSmereHodinovychRuciciek;
     private Hrac hracNaTahu;
+    private final Manager manazer;
+    private final Text textKtoJeNaRade;
+
 
     /**
      * Parametricky konstruktor kde zadavame limit hracov ktorých máme nastaviť
      * Spustí sa ArrayList pre: balicekKariet, balicekPouzitychKariet a hracov
-     * Atribút padloUno sa nastaví na false
+     * Atribút getPadloUno sa nastaví na false
      *
      * @param pocetHracov - pocet hracov ktorý majú byť v hre
      */
     public Hra(int pocetHracov) {
+        this.textKtoJeNaRade = new Text("Teraz na rade nie je nikto");
         this.poSmereHodinovychRuciciek = true;
         this.balicekKariet = new ArrayList<>();
         this.balicekPouzitychKariet = new ArrayList<>();
@@ -43,9 +49,9 @@ public class Hra {
         } else {
             this.pocetHracov = 2;
         }
-
-        this.padloUno = false;
-
+        //Cez Manazera ovladam hru
+        this.manazer = new Manager();
+        this.getManazer().manageObject(this);
     }
 
     /**
@@ -54,7 +60,6 @@ public class Hra {
      * @param kolkoKariet - kolko kariet má dostať hrac
      */
     public void dajHracoviKartyPodlaPoctu(int kolkoKariet, boolean jeToPreDalsiehoHraca) {
-        //Ako vyriesim to ked si hrac chce zobrat iba kartu ale zaroven tuto metodu pouzivaju karty Tahaj 4 a tahaj 2
         if (jeToPreDalsiehoHraca) {
             this.dalsiHrac();
         }
@@ -72,10 +77,6 @@ public class Hra {
 
     public void setPoSmereHodinovychRuciciek(boolean poSmereHodinovychRuciciek) {
         this.poSmereHodinovychRuciciek = poSmereHodinovychRuciciek;
-    }
-
-    public boolean getPoSmereHodinovychRuciciek() {
-        return this.poSmereHodinovychRuciciek;
     }
 
     public Hrac getHracNaTahu() {
@@ -118,13 +119,16 @@ public class Hra {
         return this.pocetHracov;
     }
 
-    /**
-     * Metoda na vratenie ci padlo UNO od niektorého z hráčov
-     *
-     * @return padloUno
-     */
-    public boolean padloUno() {
-        return this.padloUno;
+    public boolean jePoSmereHodinovychRuciciek() {
+        return this.poSmereHodinovychRuciciek;
+    }
+
+    public Manager getManazer() {
+        return this.manazer;
+    }
+
+    public Text getTextKtoJeNaRade() {
+        return this.textKtoJeNaRade;
     }
 
     /**
@@ -133,32 +137,38 @@ public class Hra {
      * @param hrac - hrac ktorý sa má pridať
      * @return true alebo false - ak sa splnila podmienka
      */
+
     public boolean pridajHraca(Hrac hrac) {
+        var pocetHracovSize = this.getHraci().size();
+
         if (this.getHraci().size() >= this.getPocetHracov()) {
             System.out.println("Viac hracov nejde pridať");
             return false;
         }
-        switch (this.getHraci().size()) {
+        switch (pocetHracovSize) {
             case 0 -> {
+                if (this.getPocetHracov() == 2) {
+                    hrac.getMenoHraca().setX(600);
+                }
                 this.hraci.add(hrac);
-                this.hracNaTahu = this.hraci.get(0);
+                //this.hracNaTahu = this.hraci.get(0);
                 return true;
             }
             case 1 -> {
-                if (this.getHraci().get(0).getMenoHraca().getX() == hrac.getMenoHraca().getX() &&
-                        this.getHraci().get(0).getMenoHraca().getY() == hrac.getMenoHraca().getY()) {
-                    hrac.getMenoHraca().setY(800);
-                }
+//                if (this.getHraci().get(0).getMenoHraca().getX() == hrac.getMenoHraca().getX() &&
+//                        this.getHraci().get(0).getMenoHraca().getY() == hrac.getMenoHraca().getY()) {
+                hrac.setPoziciaMenoHraca(this.getHraci().get(0).getMenoHraca().getX(), 750);
+                //hrac.getMenoHraca().setY(750);
                 this.hraci.add(hrac);
                 return true;
             }
             case 2 -> {
-                hrac.setPoziciaMenoHraca(this.getHraci().get(this.getHraci().size() - 1).getMenoHraca().getX() + 850, hrac.getMenoHraca().getY());
+                hrac.setPoziciaMenoHraca(this.getHraci().get(pocetHracovSize - 1).getMenoHraca().getX() + 850, hrac.getMenoHraca().getY());
                 this.hraci.add(hrac);
                 return true;
             }
             case 3 -> {
-                hrac.setPoziciaMenoHraca(this.getHraci().get(this.getHraci().size() - 2).getMenoHraca().getX() + 850, this.getHraci().get(1).getMenoHraca().getY());
+                hrac.setPoziciaMenoHraca(this.getHraci().get(pocetHracovSize - 2).getMenoHraca().getX() + 850, this.getHraci().get(1).getMenoHraca().getY());
                 this.hraci.add(hrac);
                 return true;
             }
@@ -172,7 +182,7 @@ public class Hra {
     /**
      * Metoda na vytvorenie všetkých 108 kariet UNO
      */
-    public void vytvorKarty() {
+    private void vytvorKarty() {
         int predvoleneX = 40;
         int predvoleneY = 400;
         Color[] poleFarieb = {Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN};
@@ -207,7 +217,7 @@ public class Hra {
     /**
      * Metóda na pomiesanie kariet v ArrayListe
      */
-    public void pomiesajKarty() {
+    private void pomiesajKarty() {
         Collections.shuffle(this.getBalicekKariet());
 
     }
@@ -229,6 +239,11 @@ public class Hra {
             this.pridajHraca(new Hrac(menoHraca, this));
         }
 
+        var pocetHracovSize = this.getHraci().size() - 1;
+        Random random = new Random();
+        this.hracNaTahu = this.getHraci().get(random.nextInt(pocetHracovSize));
+        this.textKtoJeNaRade.changeText("Teraz je na rade " + this.getHracNaTahu().getMeno());
+
         this.rozdajKarty();
         this.skryKartyHracov(this.getHracNaTahu());
         //TODO Ked kliknem na kartu balicek tak tomu hracovi co je na rade sa pridá karta - !!!Zatiaľ nevyriešené!!!😒
@@ -236,7 +251,16 @@ public class Hra {
 
         //Ked rozdá karty tak vlozi do pouzitých jednu kartu z balicka (ešte nepouzitych kariet)
         var kartaNaZaciatok = this.getBalicekKariet().get(this.getBalicekKariet().size() - 1);
+        if (kartaNaZaciatok instanceof KartaDivoka || kartaNaZaciatok instanceof KartaDivokaTahajStyri) {
+            kartaNaZaciatok.vyberSiFarbu();
+        }
         kartaNaZaciatok.zmenPoziciu((1920 / 2), 400);
+        var ktoJeNaRadeX = kartaNaZaciatok.getVonkajsiaVrstva().getX() - 20;
+        var ktoJeNaRadeY = kartaNaZaciatok.getVonkajsiaVrstva().getY() - 20;
+        this.textKtoJeNaRade.setX(ktoJeNaRadeX);
+        this.textKtoJeNaRade.setY(ktoJeNaRadeY);
+        this.textKtoJeNaRade.makeVisible();
+
         kartaNaZaciatok.vykresli();
         this.getBalicekPouzitychKariet().add(kartaNaZaciatok);
         this.getBalicekKariet().remove(kartaNaZaciatok);
@@ -246,10 +270,10 @@ public class Hra {
     /**
      * Metóda ktorá na začiatku hry rozdá hráčom karty (7(čo je vlastne maximum) kariet pre každeho)
      */
-    public void rozdajKarty() {
+    private void rozdajKarty() {
         int index = 0;
         for (Hrac hrac : this.hraci) {
-            for (int i = 0; i < 7; i++) {
+            for (int i = 1; i <= 1; i++) {
                 Karta vlozenaKarta = this.getBalicekKariet().get(index);
                 hrac.zoberKartu(vlozenaKarta);
                 this.getBalicekKariet().remove(vlozenaKarta);
@@ -280,10 +304,27 @@ public class Hra {
         }
     }
 
+
     public void dalsiHrac() {
+        ArrayList<Hrac> predchadzajuciHraci = new ArrayList<>();
+        predchadzajuciHraci.add(this.getHracNaTahu());
+        for (Hrac hrac : predchadzajuciHraci) {
+            if (hrac.getMojeKarty().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Vyhral: " + this.hracNaTahu.getMeno() + " !", "Koniec hry", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+                predchadzajuciHraci.clear();
+                return;
+            }
+        }
+//        if (this.hracNaTahu.getMojeKarty().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Vyhral: " + this.hracNaTahu.getMeno() + " !", "Koniec hry", JOptionPane.INFORMATION_MESSAGE);
+//            System.exit(0);
+//            return;
+//        }
+
         int indexDalsiehoHraca;
 
-        if (this.poSmereHodinovychRuciciek) {
+        if (this.jePoSmereHodinovychRuciciek()) {
             // ak sa hraje po smere hodinových ručičiek, získa sa index ďalšieho hráča tak,
             // že sa ku indexu aktuálneho hráča pripočíta +1
             indexDalsiehoHraca = this.getHraci().indexOf(this.getHracNaTahu()) + 1;
@@ -306,10 +347,11 @@ public class Hra {
         this.hracNaTahu = this.getHraci().get(indexDalsiehoHraca);
         // skryjú sa karty všetkých hráčov okrem hráča na ťahu
         this.skryKartyHracov(this.hracNaTahu);
-        System.out.println("Teraz je na rade " + this.getHracNaTahu().getMeno());
+        this.textKtoJeNaRade.changeText("Teraz je na rade " + this.getHracNaTahu().getMeno());
+//        System.out.println("Teraz je na rade " + this.getHracNaTahu().getMeno());
     }
 
-    public void skryKartyHracov(Hrac hracNaZobrazenie) {
+    private void skryKartyHracov(Hrac hracNaZobrazenie) {
         for (Hrac hrac : this.getHraci()) {
             if (hrac != hracNaZobrazenie) {
                 // skryjú sa karty hráčov, ktorí nie sú na rade
@@ -321,41 +363,22 @@ public class Hra {
         }
     }
 
-
-    /**
-     * Slučka hry ktorá sa vykonáva pokial this.padloUno nie je true
-     */
-    public void hlavnyLoop(String s, Scanner scanner) {
-        switch (s) {
-            case "w": //dalsi hrac
-                this.dalsiHrac();
-                break;
-            case "p": //vyber karty
-                boolean vyber = false;
-                while (!vyber) {
-                    System.out.println("Zadaj ktoru kartu chces pouzit: ");
-                    int karta = scanner.nextInt();
-                    this.getHracNaTahu().pouziKartu(this.getHracNaTahu().getMojeKarty().get((karta - 1)));
-                    vyber = true;
-                }
-                break;
-            case "k":
-                this.hracNaTahu.potiahniSiKartu();
-                break;
-            case "e": //koniec
-                System.out.println("Maj sa krásne!");
-                System.exit(0);
-
-        }
-
+    public void pouziKartu() {
+        String cisloKarty = JOptionPane.showInputDialog(null, "Zadaj cislo od 1 po " + this.hracNaTahu.getMojeKarty().size() + "\nZadaj ktoru kartu chces pouzit:");
+        int karta = Integer.parseInt(cisloKarty);
+        this.getHracNaTahu().pouziKartu(this.getHracNaTahu().getMojeKarty().get((karta - 1)));
     }
 
-    /**
-     * Metoda na ukoncenie hry
-     */
-    public void ukonciHru() {
-        this.padloUno = true;
-
+    public void potiahniKartu() {
+        this.hracNaTahu.potiahniSiKartu();
     }
 
+    public void pomocka() {
+        JOptionPane.showMessageDialog(null, "Skuska...1,2,3 :D");
+    }
+
+    public void exit() {
+        System.exit(0);
+    }
 }
+

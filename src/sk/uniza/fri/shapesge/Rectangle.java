@@ -30,7 +30,8 @@ public class Rectangle {
     }
 
     @SuppressWarnings("unused")
-    public Rectangle(int width, int height,int x, int y, Color farba) {
+    public Rectangle(int width, int height, int x, int y, Color farba) {
+        //Upravený konštruktor
         this.width = width;
         this.height = height;
         this.xPosition = x;
@@ -49,9 +50,9 @@ public class Rectangle {
         this.yPosition = y;
     }
 
-    public void posunXo(int oKolko) {
-        this.xPosition += oKolko;
-    }
+//    public void posunXo(int oKolko) {
+//        this.xPosition += oKolko;
+//    }
 
     public int getX() {
         return this.xPosition;

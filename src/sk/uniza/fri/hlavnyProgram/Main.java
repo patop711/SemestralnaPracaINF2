@@ -1,12 +1,11 @@
 package sk.uniza.fri.hlavnyProgram;
 
-import sk.uniza.fri.hrac.Hrac;
-
-import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        int pocetHracov = 0;
         //Zatial to je len takto pretoze chcem aby to bolo ovladane s mysou
         Object[] moznosti = {"Áno, chem hrať 😄", "Nie, necítim sa na to 😒"};
         int n = JOptionPane.showOptionDialog(null, "Uno je kartová hra, ktorá sa hrá so štandardným balíčkom 108 kariet. Hra sa zvyčajne hrá s 2 až 10 hráčmi a cieľom hry je zbaviť sa všetkých svojich kariet.\n" +
@@ -19,16 +18,26 @@ public class Main {
                 "\n" +
                 "Prvý hráč, ktorý sa zbaví všetkých svojich kariet, vyhráva hru. Ak hráč nevie alebo nechce položiť žiadnu kartu, musí si ťahať karty, až kým nebudú môcť položiť vhodnú kartu.\n" +
                 "\n" +
-                "Toto sú základné pravidlá hry Uno. Pevne dúfam, že ti pomôžu začať hrať a užiť si túto skvelú kartovú hru!", "UNO", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, moznosti, moznosti[0]);
+                "Toto sú základné pravidlá hry Uno. Pevne dúfam, že ti pomôžu začať hrať a užiť si túto skvelú kartovú hru!", "Uvítacia správa UNO", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, moznosti, moznosti[0]);
         if (n == 0) {
-            int pocetHracov = Integer.parseInt(JOptionPane.showInputDialog(null, "Zadaj počet hráčov:"));
+            boolean spravne = false;
+            while (!spravne) {
+                String inputPocetHracov = JOptionPane.showInputDialog(null, "Zadaj počet hráčov:");
+                if (inputPocetHracov == null) { // ak bol stlačený Cancel
+                    System.exit(0); // ukonči program
+                }
+                try {
+                    pocetHracov = Integer.parseInt(inputPocetHracov);
+                    spravne = true;
+                    if (pocetHracov == 1) {
+                        System.exit(0);
+                    }
+                } catch (NumberFormatException nfe) {
+                    JOptionPane.showMessageDialog(null, "Musíš zadať číslo!");
+                }
+            }
             Hra hra = new Hra(pocetHracov);
             hra.zacatHru();
-            Scanner scanner = new Scanner(System.in);
-            while (true) {
-                String s = scanner.next();
-                hra.hlavnyLoop(s, scanner);
-            }
         } else {
             System.exit(0);
         }

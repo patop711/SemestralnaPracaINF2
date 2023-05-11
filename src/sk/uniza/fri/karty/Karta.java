@@ -5,7 +5,7 @@ import sk.uniza.fri.shapesge.Ellipse;
 import sk.uniza.fri.shapesge.Rectangle;
 import sk.uniza.fri.shapesge.Text;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.awt.Color;
 
 public abstract class Karta {
@@ -17,9 +17,6 @@ public abstract class Karta {
     private final Ellipse elipsaRub;
     private final Text textKarty;
     private final Text textRub;
-    private boolean jeOtocena;
-    private final int x;
-    private final int y;
 
     /**
      * Abstraktna trieda Karta, z ktorej si vytvoríme dalsie karty
@@ -31,21 +28,17 @@ public abstract class Karta {
      * @param znak  - znak karty
      */
     public Karta(int x, int y, Color farba, Znak znak) {
-        this.jeOtocena = false;
-        this.x = x;
-        this.y = y;
         this.farba = farba;
         this.znak = znak;
-        this.vonkajsiaVrstva = new Rectangle(80, 120, this.x, this.y, Color.black);
+        this.vonkajsiaVrstva = new Rectangle(80, 120, x, y, Color.black);
         this.vnutornaVrstva = new Rectangle(this.getVonkajsiaVrstva().getWidth() - 10, this.getVonkajsiaVrstva().getHeight() - 10, this.getVonkajsiaVrstva().getX() + 5, this.getVonkajsiaVrstva().getY() + 5, this.getFarba());
-        //this.vnutornaVrstva.setX(this.getVonkajsiaVrstva().getX() + 5);
-        //this.getVnutornaVrstva().setY(this.getVonkajsiaVrstva().getY() + 5);
         this.elipsa = new Ellipse(60, 60, this.getVnutornaVrstva().getX() + 5, this.getVnutornaVrstva().getY() + 20);
         this.elipsaRub = new Ellipse(this.getElipsa().getDiameterX(), this.getElipsa().getDiameterY(), this.getElipsa().getPoziciaX(), this.getElipsa().getPoziciaY());
         this.textKarty = new Text(this.getZnak().getText(), this.getElipsa().getPoziciaX() + 24, this.getElipsa().getPoziciaY() + 35, 20);
         this.textRub = new Text("UNO", this.getTextKarty().getX() - 15, this.getTextKarty().getY(), this.getTextKarty().getSize());
         this.vykresli();
     }
+    //Gettery
 
     /**
      * Vráti navratový typ typu Rectangle
@@ -72,15 +65,6 @@ public abstract class Karta {
      */
     public Ellipse getElipsa() {
         return this.elipsa;
-    }
-
-    /**
-     * Vráti či je alebo nie je karta otocena
-     *
-     * @return jeOtocena - Vráti či je alebo nie je karta otocena
-     */
-    public boolean getJeOtocena() {
-        return this.jeOtocena;
     }
 
     /**
@@ -128,6 +112,8 @@ public abstract class Karta {
         return this.textRub;
     }
 
+    //Settery
+
     /**
      * Metóda na zmenu pozície karty
      *
@@ -154,16 +140,11 @@ public abstract class Karta {
         this.getTextRub().setY(this.getTextKarty().getY());
     }
 
-//    public void posunVodorovne(int kolkoX) {
-//        this.getVonkajsiaVrstva().moveHorizontal(kolkoX);
-//        this.getVnutornaVrstva().moveHorizontal(kolkoX);
-//        this.getElipsa().moveHorizontal(kolkoX);
-//        this.getTextKarty().moveHorizontal(kolkoX);
-//        this.getElipsaRub().moveHorizontal(kolkoX);
-//        this.getTextRub().moveHorizontal(kolkoX);
-//
-//    }
-
+    /**
+     * Metóda na posunutie karty
+     *
+     * @param kolkoY - o kolko chceme kartu posunut z jej pôvodnej pozície
+     */
     public void posunZvisle(int kolkoY) {
         this.getVonkajsiaVrstva().moveVertical(kolkoY);
         this.getVnutornaVrstva().moveVertical(kolkoY);
@@ -187,19 +168,6 @@ public abstract class Karta {
         this.getElipsa().makeVisible();
         this.getTextKarty().makeVisible();
     }
-
-//    public void vykresli2(int x, int y) {
-//        this.zmenPoziciu(x, y);
-//        this.getTextRub().makeInvisible();
-//        this.getElipsaRub().makeInvisible();
-//
-//        this.getVonkajsiaVrstva().makeVisible();
-//        this.getVnutornaVrstva().makeVisible();
-//
-//        this.getElipsa().makeVisible();
-//        this.getTextKarty().makeVisible();
-//
-//    }
 
     /**
      * Metoda ktorá otočí kartu na rub
@@ -229,33 +197,29 @@ public abstract class Karta {
 
     /**
      * Abstraktná metoda ktorá vykoná akciu karty
+     * Polymorfizmus
      *
      * @param hrac - ktorý hráč ju ma použiť
-     * @return
+     * @return vrati ci sa akcia podarila
      */
     public abstract boolean vykonajAkciu(Hrac hrac);
 
     /**
-     * Metóda ktorá otočí kartu naopak, ak sú splnené podmienky
+     * Parametrická metóda ktorá nastaví novú farbu
+     *
+     * @param novaFarba - nová farba karty
      */
-//    public void otocKartu() {
-//        if (this.getJeOtocena()) {
-//            this.vykresli();
-//            this.jeOtocena = false;
-//        } else if (!this.getJeOtocena()) {
-//            this.rub();
-//            this.jeOtocena = true;
-//        }
-//
-//    }
-    public void setFarba (Color novaFarba) {
+    public void setFarba(Color novaFarba) {
         this.farba = novaFarba;
     }
 
-    public boolean vyberSiFarbu() {
+    /**
+     * Metóda na výber farby karty cez JOptionPane
+     */
+    public void vyberSiFarbu() {
         //Polymorfizmus
         String[] moznosti = {"Cervena", "Zelena", "Modra", "Zlta"};
-        int vysledok = JOptionPane.showOptionDialog(null, "Vyber farbu karty", "Farba karty", JOptionPane.DEFAULT_OPTION,
+        int vysledok = JOptionPane.showOptionDialog(null, "Vyber farbu karty:", "Farba karty", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.PLAIN_MESSAGE, null, moznosti, moznosti[0]);
         switch (vysledok) {
             case 0 -> {
@@ -275,7 +239,6 @@ public abstract class Karta {
                 this.setFarba(Color.yellow);
             }
         }
-        return true;
     }
 
 }

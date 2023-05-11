@@ -4,6 +4,7 @@ import sk.uniza.fri.hlavnyProgram.Hra;
 import sk.uniza.fri.karty.Karta;
 import sk.uniza.fri.shapesge.Text;
 
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,13 +63,11 @@ public class Hrac {
             karta.rub();
         }
     }
-
     public void zobrazKarty() {
         for (Karta karta : this.getMojeKarty()) {
             karta.vykresli();
         }
     }
-
     /**
      * Metóda na vrátenie mena hráča
      *
@@ -77,7 +76,6 @@ public class Hrac {
     public String getMeno() {
         return this.meno;
     }
-
     /**
      * Vráti objekt typu ArrayList karietHraca
      *
@@ -86,7 +84,6 @@ public class Hrac {
     public ArrayList<Karta> getMojeKarty() {
         return this.mojeKarty;
     }
-
     /**
      * Metóda ktorá použije kartu z hráčovej ruky a následne ju vymaže z ArrayListu a zoradí karty
      *
@@ -102,10 +99,11 @@ public class Hrac {
                 this.getHra().pridajPouzituKartu(karta);
                 this.aktualizujPozicieKariet();
                 this.getHra().dalsiHrac();
+            } else {
+                JOptionPane.showMessageDialog(null, "Túto kartu nie je možné položíť\nProsím vyber si inú kartu", "Výsledok použitia karty", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
-
     private void aktualizujPozicieKariet() {
         List<Karta> karty = this.getMojeKarty();
         int startX = this.getMenoHraca().getX() + 110;
@@ -123,12 +121,6 @@ public class Hrac {
         }
     }
 
-
-    public void zoradKartyPodlaFarby() {
-        //TODO treba zoradit karty podla farby (neviem ako to spravit 😥)
-    }
-
-
     /**
      * Metoda ktorá zoberie kartu z balicka kariet (ArrayList) z triedy hra a pridá ich hráčovi do ruky pričom sa usporiadajú aby neboli všetky na tej istej
      * pozícii. Pokial ideme dat prvu kartu tak sa da vedla mena hráča
@@ -137,7 +129,7 @@ public class Hrac {
      */
     public boolean zoberKartu(Karta karta) {
         boolean vysledok = false;
-        var pocetKariet = this.getMojeKarty().size() - 1;
+        var pocetKariet = this.getMojeKarty().size();
         if (this.getMojeKarty().isEmpty()) {
             Karta prvaKarta = karta;
             prvaKarta.zmenPoziciu(this.getMenoHraca().getX() + 110, this.getMenoHraca().getY());
@@ -160,34 +152,10 @@ public class Hrac {
 
         return vysledok;
     }
-
-//    private void upravPozicieKarietVRuke() {
-//        int startX = this.getMenoHraca().getX() + 110;
-//        int startY = this.getMenoHraca().getY();
-//        for (int i = 0; i < this.getMojeKarty().size(); i++) {
-//            Karta kartaVRuke = this.getMojeKarty().get(i);
-//            int x = startX + (i * 88);
-//            int y = startY;
-//            if (i >= 7) {
-//                x -= 7 * 88;
-//                y += 125;
-//            }
-//            kartaVRuke.zmenPoziciu(x, y);
-//        }
-//    }
-
-
+    /**
+     * Metóda pomocou ktorej si hráč potiahne kartu z balíčka kariet
+     */
     public void potiahniSiKartu() {
         this.getHra().dajHracoviKartyPodlaPoctu(1, false);
-    }
-
-    /**
-     * Otočí všetky hráčove ktoré ma dostupné
-     */
-    public void otocMojeKarty() {
-        for (Karta karta : this.getMojeKarty()) {
-            karta.skrySa();
-
-        }
     }
 }

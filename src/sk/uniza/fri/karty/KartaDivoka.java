@@ -2,7 +2,7 @@ package sk.uniza.fri.karty;
 
 import sk.uniza.fri.hrac.Hrac;
 import sk.uniza.fri.shapesge.Rectangle;
-import javax.swing.JOptionPane;
+
 import java.awt.Color;
 
 public class KartaDivoka extends Karta {
@@ -32,9 +32,8 @@ public class KartaDivoka extends Karta {
     }
 
     @Override
-    public boolean vyberSiFarbu() {
+    public void vyberSiFarbu() {
         super.vyberSiFarbu();
-        return true;
     }
 
     @Override

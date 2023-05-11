@@ -49,7 +49,8 @@ public class Text {
 
     @SuppressWarnings("unused")
     public Text(String text) {
-        this(text, 0, 20, 30);
+        //pred úpravou bolo y = 20;
+        this(text, 0, 30, 30);
     }
 
     /**

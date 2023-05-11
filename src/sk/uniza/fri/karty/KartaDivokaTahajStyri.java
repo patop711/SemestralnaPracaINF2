@@ -31,9 +31,8 @@ public class KartaDivokaTahajStyri extends Karta {
     }
 
     @Override
-    public boolean vyberSiFarbu() {
+    public void vyberSiFarbu() {
         super.vyberSiFarbu();
-        return true;
     }
 
     @Override

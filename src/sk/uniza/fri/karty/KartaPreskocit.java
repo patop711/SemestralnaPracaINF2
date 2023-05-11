@@ -27,11 +27,12 @@ public class KartaPreskocit extends Karta {
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Polymorfizmus
-        if (hrac.getHra().getBalicekPouzitychKariet().get(hrac.getHra().getBalicekPouzitychKariet().size() - 1).getFarba() == this.getFarba()) {
+        var predchazdajucaKarta = hrac.getHra().getBalicekPouzitychKariet().size() - 1;
+
+        if (hrac.getHra().getBalicekPouzitychKariet().get(predchazdajucaKarta).getFarba() == this.getFarba()) {
             hrac.getHra().dalsiHrac();
             return true;
         }
-        System.out.println("Kartu nie je mozne polozit");
         return false;
     }
 

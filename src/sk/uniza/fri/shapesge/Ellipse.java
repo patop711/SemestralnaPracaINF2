@@ -37,11 +37,12 @@ public class Ellipse {
         this.xPosition = x;
         this.yPosition = y;
         this.color = Color.white;
-        //Color.black bolo pred tým
+        //Color.black bolo pred úpravou
         this.isVisible = false;
 
         this.drawable = new EllipseDrawable();
     }
+
 
     public void setX(int xPosition) {
         this.xPosition = xPosition;
