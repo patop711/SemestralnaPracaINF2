@@ -1,7 +1,6 @@
 package sk.uniza.fri.hlavnyProgram;
 
 import javax.swing.JOptionPane;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -41,13 +40,5 @@ public class Main {
         } else {
             System.exit(0);
         }
-//        Hrac hrac1 = new Hrac("Patrik", hra);
-//        Hrac hrac2 = new Hrac("Lukáš", hra);
-//        Hrac hrac3 = new Hrac("Katarina", hra);
-//        Hrac hrac4 = new Hrac("Dáša", hra);
-//        hra.pridajHraca(hrac1);
-//        hra.pridajHraca(hrac2);
-//        hra.pridajHraca(hrac3);
-//        hra.pridajHraca(hrac4);
     }
 }

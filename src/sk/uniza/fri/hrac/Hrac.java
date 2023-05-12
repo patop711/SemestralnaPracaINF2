@@ -52,7 +52,7 @@ public class Hrac {
         this.getMenoHraca().setX(x);
         this.getMenoHraca().setY(y);
         this.getMenoHraca().makeVisible();
-        //novaKarta.zmenPoziciu(poslednaKarta.getVonkajsiaVrstva().getX() + 88, poslednaKarta.getVonkajsiaVrstva().getY());
+
         for (Karta karta : this.getMojeKarty()) {
             karta.posunZvisle(y);
         }
@@ -105,7 +105,7 @@ public class Hrac {
      * Metóda pomocou ktorej si hráč potiahne kartu z balíčka kariet
      */
     public void potiahniSiKartu() {
-        this.getHra().dajHracoviKartyPodlaPoctu(1, false);
+        this.getHra().getBalikUnoKariet().dajHracoviKartyPodlaPoctu(1, false);
     }
 
     /**
@@ -113,7 +113,6 @@ public class Hrac {
      *
      * @param karta - karta ktorú použijem z mojej ruky(ArrayListu)
      */
-    //TODO zabezpečiť aby sa odstranene karty dali do ArrayListu pouziteKarty v triede hra - OK
     public void pouziKartu(Karta karta) {
         List<Karta> karty = this.getMojeKarty();
         if (karty.contains(karta)) {

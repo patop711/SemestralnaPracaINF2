@@ -45,11 +45,9 @@ public class KartaNormalna extends Karta {
     public boolean vykonajAkciu(Hrac hrac) {
         //Tu sa deje polymorfizmus
         //Ak máme takú istú farbu alebo znak našej karty, tak sa použije
-        var predchazdajucaKarta = hrac.getHra().getBalicekPouzitychKariet().size() - 1;
+        var predchazdajucaKarta = hrac.getHra().getBalikPouzitychUnoKariet().pocetKarietVBaliku() - 1;
 
-        return hrac.getHra().getBalicekPouzitychKariet().get(predchazdajucaKarta).getFarba() == this.getFarba() ||
-                hrac.getHra().getBalicekPouzitychKariet().get(predchazdajucaKarta).getZnak() == this.getZnak();
-
-
+        return hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getFarba() == this.getFarba() ||
+               hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getZnak() == this.getZnak();
     }
 }

@@ -43,9 +43,9 @@ public class KartaPreskocit extends Karta {
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Polymorfizmus
-        var predchazdajucaKarta = hrac.getHra().getBalicekPouzitychKariet().size() - 1;
+        var predchazdajucaKarta = hrac.getHra().getBalikPouzitychUnoKariet().pocetKarietVBaliku() - 1;
 
-        if (hrac.getHra().getBalicekPouzitychKariet().get(predchazdajucaKarta).getFarba() == this.getFarba()) {
+        if (hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getFarba() == this.getFarba()) {
             hrac.getHra().dalsiHrac();
             return true;
         }

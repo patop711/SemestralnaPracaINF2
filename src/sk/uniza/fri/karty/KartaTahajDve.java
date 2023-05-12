@@ -43,10 +43,10 @@ public class KartaTahajDve extends Karta {
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Polymorfizmus
-        var predchazdajucaKarta = hrac.getHra().getBalicekPouzitychKariet().size() - 1;
+        var predchazdajucaKarta = hrac.getHra().getBalikPouzitychUnoKariet().pocetKarietVBaliku() - 1;
 
-        if (hrac.getHra().getBalicekPouzitychKariet().get(predchazdajucaKarta).getFarba() == this.getFarba() ||
-            hrac.getHra().getBalicekPouzitychKariet().get(predchazdajucaKarta).getZnak() == this.getZnak()) {
+        if (hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getFarba() == this.getFarba() ||
+            hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getZnak() == this.getZnak()) {
             hrac.getHra().dajHracoviKartyPodlaPoctu(2, true);
             return true;
         }
