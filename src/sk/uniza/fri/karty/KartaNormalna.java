@@ -1,7 +1,6 @@
 package sk.uniza.fri.karty;
 
 import sk.uniza.fri.hrac.Hrac;
-import sk.uniza.fri.shapesge.Rectangle;
 
 import java.awt.Color;
 
@@ -9,11 +8,6 @@ public class KartaNormalna extends Karta {
 
     public KartaNormalna(int x, int y, Color farba, Znak znak) {
         super(x, y, farba, znak);
-    }
-
-    @Override
-    public Rectangle getVonkajsiaVrstva() {
-        return super.getVonkajsiaVrstva();
     }
 
     @Override

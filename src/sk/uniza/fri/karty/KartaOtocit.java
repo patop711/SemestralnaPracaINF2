@@ -1,18 +1,11 @@
 package sk.uniza.fri.karty;
 
 import sk.uniza.fri.hrac.Hrac;
-import sk.uniza.fri.shapesge.Rectangle;
-
 import java.awt.Color;
 
 public class KartaOtocit extends Karta {
     public KartaOtocit(int x, int y, Color farba) {
         super(x, y, farba, Znak.KARTA_OTOCIT);
-    }
-
-    @Override
-    public Rectangle getVonkajsiaVrstva() {
-        return super.getVonkajsiaVrstva();
     }
 
     @Override
@@ -47,12 +40,12 @@ public class KartaOtocit extends Karta {
 
         if (hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getFarba() == this.getFarba() ||
             hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getZnak() == this.getZnak()) {
-
-            if (hrac.getHra().jePoSmereHodinovychRuciciek()) {
-                hrac.getHra().setPoSmereHodinovychRuciciek(false);
-            } else {
-                hrac.getHra().setPoSmereHodinovychRuciciek(true);
-            }
+//            if (hrac.getHra().jePoSmereHodinovychRuciciek()) {
+//                hrac.getHra().setPoSmereHodinovychRuciciek(false);
+//            } else {
+//                hrac.getHra().setPoSmereHodinovychRuciciek(true);
+//            }
+            hrac.getHra().setPoSmereHodinovychRuciciek(!hrac.getHra().jePoSmereHodinovychRuciciek());
             return true;
         } else {
             return false;

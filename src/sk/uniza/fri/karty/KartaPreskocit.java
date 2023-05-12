@@ -1,18 +1,11 @@
 package sk.uniza.fri.karty;
 
 import sk.uniza.fri.hrac.Hrac;
-import sk.uniza.fri.shapesge.Rectangle;
-
 import java.awt.Color;
 
 public class KartaPreskocit extends Karta {
     public KartaPreskocit(int x, int y, Color farba) {
         super(x, y, farba, Znak.KARTA_PRESKOCIT);
-    }
-
-    @Override
-    public Rectangle getVonkajsiaVrstva() {
-        return super.getVonkajsiaVrstva();
     }
 
     @Override

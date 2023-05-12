@@ -41,57 +41,30 @@ public abstract class Karta {
     //Gettery
 
     /**
-     * Vráti navratový typ typu Rectangle
+     * Vráti objekt typu Rectangle
      *
-     * @return vonkajsiaVrstva- Vráti navratový typ typu Rectangle
+     * @return vonkajsiaVrstva
      */
     public Rectangle getVonkajsiaVrstva() {
         return this.vonkajsiaVrstva;
     }
 
     /**
-     * Vráti navratový typ typu Rectangle
+     * Vráti objekt typu Rectangle
      *
-     * @return vnutornaVrstva- Vráti navratový typ typu Rectangle
+     * @return vnutornaVrstva
      */
     public Rectangle getVnutornaVrstva() {
         return this.vnutornaVrstva;
     }
 
     /**
-     * Vráti navratový typ typu Ellipse
+     * Vráti objekt typu Ellipse
      *
-     * @return elipsa - Vráti navratový typ typu Ellipse
+     * @return elipsa
      */
     public Ellipse getElipsa() {
         return this.elipsa;
-    }
-
-    /**
-     * Vráti navratový typ typu Color
-     *
-     * @return farba - Vráti navratový typ typu Text
-     */
-    public Color getFarba() {
-        return this.farba;
-    }
-
-    /**
-     * Vráti navratový typ typu Znak
-     *
-     * @return znak - Vráti navratový typ typu Znak
-     */
-    public Znak getZnak() {
-        return this.znak;
-    }
-
-    /**
-     * Vráti navratový typ typu Text
-     *
-     * @return textKarty - Vráti navratový typ typu Text
-     */
-    public Text getTextKarty() {
-        return this.textKarty;
     }
 
     /**
@@ -102,9 +75,35 @@ public abstract class Karta {
     public Ellipse getElipsaRub() {
         return this.elipsaRub;
     }
+    /**
+     * Vráti objekt typu Color
+     *
+     * @return farba - Vráti navratový typ typu Text
+     */
+    public Color getFarba() {
+        return this.farba;
+    }
 
     /**
-     * Vráti navratový typ typu Text
+     * Vráti objekt typu Znak
+     *
+     * @return znak - Vráti navratový typ typu Znak
+     */
+    public Znak getZnak() {
+        return this.znak;
+    }
+
+    /**
+     * Vráti objekt typu Text
+     *
+     * @return textKarty - Vráti navratový typ typu Text
+     */
+    public Text getTextKarty() {
+        return this.textKarty;
+    }
+
+    /**
+     * Vráti objekt typu Text
      *
      * @return textRub - Vráti navratový typ typu Text
      */
@@ -141,7 +140,7 @@ public abstract class Karta {
     }
 
     /**
-     * Metóda na posunutie karty
+     * Metóda na posunutie karty zvisle
      *
      * @param kolkoY - o kolko chceme kartu posunut z jej pôvodnej pozície
      */

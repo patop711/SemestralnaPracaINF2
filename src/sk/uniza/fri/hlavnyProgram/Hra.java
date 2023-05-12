@@ -29,8 +29,7 @@ public class Hra {
 
     /**
      * Parametricky konstruktor kde zadavame limit hracov ktorých máme nastaviť
-     * Spustí sa ArrayList pre: balicekKariet, balicekPouzitychKariet a hracov
-     * Atribút getPadloUno sa nastaví na false
+     * Spustí sa ArrayList pre hracov
      *
      * @param pocetHracov - pocet hracov ktorý majú byť v hre
      */
@@ -77,7 +76,7 @@ public class Hra {
     public void dajHracoviKartyPodlaPoctu(int kolkoKariet, boolean jeToPreDalsiehoHraca) {
         if (this.getBalikUnoKariet().jeBalicekPrazdny()) {
             for (int i = this.getBalikPouzitychUnoKariet().pocetKarietVBaliku() - 2; i >= 0 ; i--) {
-                var kartaNaPridanie = this.getBalikPouzitychUnoKariet().getBalicekKarietList().get(i);
+                var kartaNaPridanie = this.getBalikPouzitychUnoKariet().dajKartuNaIndexe(i);
                 this.getBalikUnoKariet().pridajKartuDoBalika(kartaNaPridanie);
                 this.getBalikPouzitychUnoKariet().getBalicekKarietList().remove(i);
             }
@@ -85,18 +84,27 @@ public class Hra {
         } else {
             this.getBalikUnoKariet().dajHracoviKartyPodlaPoctu(kolkoKariet, jeToPreDalsiehoHraca);
         }
+        System.out.println(this.getBalikUnoKariet().pocetKarietVBaliku());
     }
 
+    /**
+     * Setter na nastavenie akým smerom majú ísť hráči
+     * @param poSmereHodinovychRuciciek - po smere alebo proti smeru
+     */
     public void setPoSmereHodinovychRuciciek(boolean poSmereHodinovychRuciciek) {
         this.poSmereHodinovychRuciciek = poSmereHodinovychRuciciek;
     }
 
+    /**
+     * Vráti objekt typu hráč ktorý je na ťahu
+     * @return hracNaTahu
+     */
     public Hrac getHracNaTahu() {
         return this.hracNaTahu;
     }
 
     /**
-     * Vráti objekt typu ArrayList
+     * Vráti objekt typu ArrayList kde sú hráči
      *
      * @return hraci
      */
@@ -113,25 +121,37 @@ public class Hra {
         return this.pocetHracov;
     }
 
+    /**
+     * Vráti boolean či sa ide po smere(true) alebo proti smeru(false)
+     * @return poSmereHodinovychRuciciek
+     */
     public boolean jePoSmereHodinovychRuciciek() {
         return this.poSmereHodinovychRuciciek;
     }
 
+    /**
+     * Vráti objekt typu Manager
+     * @return manazer
+     */
     public Manager getManazer() {
         return this.manazer;
     }
 
+    /**
+     * Vráti objekt typu Text
+     * @return textKtoJeNaRade
+     */
     public Text getTextKtoJeNaRade() {
         return this.textKtoJeNaRade;
     }
 
     /**
-     * Metoda na pridanie hraca
+     * Metoda na pridanie hraca do hry
      *
      * @param hrac - hrac ktorý sa má pridať
      */
 
-    public void pridajHraca(Hrac hrac) {
+    private void pridajHraca(Hrac hrac) {
         var pocetHracovSize = this.getHraci().size();
 
         switch (pocetHracovSize) {
@@ -194,12 +214,21 @@ public class Hra {
         this.getTextKtoJeNaRade().setY(ktoJeNaRadeY);
         this.getTextKtoJeNaRade().makeVisible();
 
+        Text textPomoc = new Text("Stlač klávesu\nF1 pre pomoc");
+        textPomoc.setX(1700);
+        textPomoc.setY(900);
+        textPomoc.makeVisible();
+
         kartaNaZaciatok.vykresli();
         this.getBalikPouzitychUnoKariet().pridajKartuDoBalika(kartaNaZaciatok);
         this.getBalikUnoKariet().vymazKartuZBalika(kartaNaZaciatok);
 
     }
 
+    /**
+     * Pridá použitú kartu do ArrayListu triedy BalikPouzitychUnoKariet a na plátno
+     * @param pouzitaKarta - pouzita karta ktorá sa má vložiť
+     */
     public void pridajPouzituKartu(Karta pouzitaKarta) {
         pouzitaKarta.zmenPoziciu((1920 / 2), 400);
 
@@ -213,7 +242,9 @@ public class Hra {
         pouzitaKarta.vykresli();
     }
 
-
+    /**
+     * Metoda pomocou ktorej sa prejde na dalsieho hráča
+     */
     public void dalsiHrac() {
         ArrayList<Hrac> predchadzajuciHraci = new ArrayList<>();
         predchadzajuciHraci.add(this.getHracNaTahu());
@@ -255,6 +286,10 @@ public class Hra {
 //        System.out.println("Teraz je na rade " + this.getHracNaTahu().getMeno());
     }
 
+    /**
+     * Otočí všetky karty hráčov okrem toho ktorý je na taho
+     * @param hracNaZobrazenie - hrac ktorý je na tahu
+     */
     private void skryKartyHracov(Hrac hracNaZobrazenie) {
         for (Hrac hrac : this.getHraci()) {
             if (hrac != hracNaZobrazenie) {
@@ -267,6 +302,9 @@ public class Hra {
         }
     }
 
+    /**
+     * Metoda pomocou ktorej sa ovláda akutalny hráč na ťahu cez Manažéra, ak chce použiť niektorú zo svojich kariet
+     */
     public void pouziKartu() {
         boolean vysledok = false;
         while (!vysledok) {
@@ -275,6 +313,8 @@ public class Hra {
                 int karta = Integer.parseInt(cisloKarty);
                 this.getHracNaTahu().pouziKartu(this.getHracNaTahu().getMojeKarty().get((karta - 1)));
                 vysledok = true;
+            } catch (IndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(null, "Zadal si číslo mänšie ako 1 alebo väčšie ako " + this.hracNaTahu.getMojeKarty().size());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Nezadal si cislo, musis zadat cislo od 1 po " + this.hracNaTahu.getMojeKarty().size());
             } catch (NullPointerException e) {
@@ -285,13 +325,23 @@ public class Hra {
         }
     }
 
+    /**
+     * Metoda pomocou ktorej sa ovláda akutalny hráč na ťahu cez Manažéra, ak si chce potiahnuť kartu
+     */
     public void potiahniKartu() {
         this.hracNaTahu.potiahniSiKartu();
     }
 
+    /**
+     * Metoda pomocou ktorej hráč môže zistit ako sa má hra ovládať a ako fungujú jednotlivé karty
+     */
     public void pomocka() {
         JOptionPane.showMessageDialog(null, "Ovládanie:\nKlávesa Q -> Použitie karty\nKlávesa W -> potiahnutie karty\nKlávesa E -> ukončenie hry");
     }
+
+    /**
+     * Metoda pomocou ktorej môže hráč ukončiť program stlačením tlačidla Esc
+     */
     public void exit() {
         System.exit(0);
     }

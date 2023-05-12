@@ -1,18 +1,11 @@
 package sk.uniza.fri.karty;
 
 import sk.uniza.fri.hrac.Hrac;
-import sk.uniza.fri.shapesge.Rectangle;
-
 import java.awt.Color;
 
 public class KartaDivokaTahajStyri extends Karta {
     public KartaDivokaTahajStyri(int x, int y) {
         super(x, y, Color.gray, Znak.KARTA_TAHAJ_STYRI);
-    }
-
-    @Override
-    public Rectangle getVonkajsiaVrstva() {
-        return super.getVonkajsiaVrstva();
     }
 
     @Override

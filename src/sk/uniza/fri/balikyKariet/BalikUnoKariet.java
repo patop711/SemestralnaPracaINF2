@@ -23,16 +23,6 @@ public class BalikUnoKariet extends Balik {
     }
 
     @Override
-    public void pridajKartuDoBalika(Karta karta) {
-        super.pridajKartuDoBalika(karta);
-    }
-
-    @Override
-    public void vymazKartuZBalika(Karta karta) {
-        super.vymazKartuZBalika(karta);
-    }
-
-    @Override
     public Hra getHra() {
         return super.getHra();
     }
@@ -53,10 +43,24 @@ public class BalikUnoKariet extends Balik {
     }
 
     @Override
+    public void pridajKartuDoBalika(Karta karta) {
+        super.pridajKartuDoBalika(karta);
+    }
+
+    @Override
+    public void vymazKartuZBalika(Karta karta) {
+        super.vymazKartuZBalika(karta);
+    }
+
+    @Override
     public Karta dajKartuNaIndexe(int index) {
         return super.dajKartuNaIndexe(index);
     }
 
+    /**
+     * Rozdá karty hráčom z ArrayListu
+     * @param hraci - ArrayList hráčov
+     */
     public void rozdajKarty(ArrayList<Hrac> hraci) {
         int index = 0;
         for (Hrac hrac : hraci) {

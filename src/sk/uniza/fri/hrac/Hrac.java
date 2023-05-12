@@ -29,12 +29,16 @@ public class Hrac {
 
     }
 
+    /**
+     * Vráti objekt typu Hra
+     * @return hra
+     */
     public Hra getHra() {
         return this.hra;
     }
 
     /**
-     * Vráti návratovú hodnotu typu Text
+     * Vráti objekt typu Text
      *
      * @return menoHraca - Vráti návratovú hodnotu typu Text
      */
@@ -58,18 +62,25 @@ public class Hrac {
         }
     }
 
+    /**
+     * Otočí karty smerom na rub
+     */
     public void skryKarty() {
         for (Karta karta : this.getMojeKarty()) {
             karta.rub();
         }
     }
+
+    /**
+     * Otočí smerom karty na farbu a znak
+     */
     public void zobrazKarty() {
         for (Karta karta : this.getMojeKarty()) {
             karta.vykresli();
         }
     }
     /**
-     * Metóda na vrátenie mena hráča
+     * Vráti String mena hráča
      *
      * @return meno - vráti meno hráča
      */
@@ -77,7 +88,7 @@ public class Hrac {
         return this.meno;
     }
     /**
-     * Vráti objekt typu ArrayList karietHraca
+     * Vráti objekt typu ArrayList
      *
      * @return mojeKarty
      */
@@ -85,6 +96,9 @@ public class Hrac {
         return this.mojeKarty;
     }
 
+    /**
+     * Aktualizuje pozície kariet po tom čo sa pridá alebo použije karta
+     */
     private void aktualizujPozicieKariet() {
         List<Karta> karty = this.getMojeKarty();
         int startX = this.getMenoHraca().getX() + 110;
@@ -105,7 +119,7 @@ public class Hrac {
      * Metóda pomocou ktorej si hráč potiahne kartu z balíčka kariet
      */
     public void potiahniSiKartu() {
-        this.getHra().getBalikUnoKariet().dajHracoviKartyPodlaPoctu(1, false);
+        this.getHra().dajHracoviKartyPodlaPoctu(1, false);
     }
 
     /**
@@ -149,7 +163,7 @@ public class Hrac {
                 this.getMojeKarty().add(novaKarta);
                 vysledok = true;
             } else {
-                System.out.println("Hrac ma maximum kariet!");
+                JOptionPane.showMessageDialog(null, "Hráč ma maximum kariet!\nMusí už použiť niektoré z existujúcich.", "Nie je možné si zobrať kartu", JOptionPane.WARNING_MESSAGE);
             }
         }
 

@@ -10,15 +10,6 @@ public class BalikPouzitychUnoKariet extends Balik {
         super(hra);
     }
 
-    @Override
-    public void pridajKartuDoBalika(Karta karta) {
-        super.pridajKartuDoBalika(karta);
-    }
-
-    @Override
-    public void vymazKartuZBalika(Karta karta) {
-        super.vymazKartuZBalika(karta);
-    }
 
     @Override
     public int pocetKarietVBaliku() {
@@ -38,6 +29,16 @@ public class BalikPouzitychUnoKariet extends Balik {
     @Override
     public boolean jeBalicekPrazdny() {
         return super.jeBalicekPrazdny();
+    }
+
+    @Override
+    public void pridajKartuDoBalika(Karta karta) {
+        super.pridajKartuDoBalika(karta);
+    }
+
+    @Override
+    public void vymazKartuZBalika(Karta karta) {
+        super.vymazKartuZBalika(karta);
     }
 
     @Override
