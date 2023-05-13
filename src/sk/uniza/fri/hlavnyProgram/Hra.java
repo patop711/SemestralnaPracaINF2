@@ -82,13 +82,12 @@ public class Hra {
             for (int i = this.getBalikPouzitychUnoKariet().pocetKarietVBaliku() - 2; i >= 0 ; i--) {
                 var kartaNaPridanie = this.getBalikPouzitychUnoKariet().dajKartuNaIndexe(i);
                 this.getBalikUnoKariet().pridajKartuDoBalika(kartaNaPridanie);
-                this.getBalikPouzitychUnoKariet().getBalicekKarietList().remove(i);
+                this.getBalikPouzitychUnoKariet().vymazKartuZBalika(kartaNaPridanie);
             }
             this.getBalikUnoKariet().dajHracoviKartyPodlaPoctu(kolkoKariet, jeToPreDalsiehoHraca);
         } else {
             this.getBalikUnoKariet().dajHracoviKartyPodlaPoctu(kolkoKariet, jeToPreDalsiehoHraca);
         }
-        System.out.println(this.getBalikUnoKariet().pocetKarietVBaliku());
     }
 
     /**
@@ -287,7 +286,6 @@ public class Hra {
         // skryjú sa karty všetkých hráčov okrem hráča na ťahu
         this.skryKartyHracov(this.hracNaTahu);
         this.getTextKtoJeNaRade().changeText("Teraz je na rade " + this.getHracNaTahu().getMeno());
-//        System.out.println("Teraz je na rade " + this.getHracNaTahu().getMeno());
     }
 
     /**

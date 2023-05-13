@@ -69,9 +69,9 @@ public class BalikUnoKariet extends Balik {
         int index = 0;
         for (Hrac hrac : hraci) {
             for (int i = 1; i <= 7; i++) {
-                Karta vlozenaKarta = this.getBalicekKarietList().get(index);
+                Karta vlozenaKarta = this.dajKartuNaIndexe(index);
                 hrac.zoberKartu(vlozenaKarta);
-                this.getBalicekKarietList().remove(vlozenaKarta);
+                this.vymazKartuZBalika(vlozenaKarta);
                 index++;
             }
         }
@@ -109,8 +109,6 @@ public class BalikUnoKariet extends Balik {
             this.getBalicekKarietList().add(new KartaDivokaTahajStyri(predvoleneX, predvoleneY));
             this.getBalicekKarietList().add(new KartaDivoka(predvoleneX, predvoleneY));
         }
-
-        System.out.println(super.pocetKarietVBaliku());
         this.pomiesajKarty();
     }
 
@@ -135,7 +133,6 @@ public class BalikUnoKariet extends Balik {
             Karta novaKarta = this.getBalicekKarietList().get(0);
             if (this.getHra().getHracNaTahu().zoberKartu(novaKarta)) {
                 this.getBalicekKarietList().remove(novaKarta);
-                System.out.println(novaKarta.toString());
             }
         }
         if (!jeToPreDalsiehoHraca) {
