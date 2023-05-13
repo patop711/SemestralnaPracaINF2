@@ -4,6 +4,10 @@ import sk.uniza.fri.hrac.Hrac;
 
 import java.awt.Color;
 
+/** Trieda KartaNormalna(potomok triedy Karta)
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class KartaNormalna extends Karta {
 
     public KartaNormalna(int x, int y, Color farba, Znak znak) {

@@ -8,6 +8,10 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Trieda Hráč, vytvorí hráča a "ruku" kde bude mať svoje karty
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class Hrac {
     private final String meno;
     private final ArrayList<Karta> mojeKarty;

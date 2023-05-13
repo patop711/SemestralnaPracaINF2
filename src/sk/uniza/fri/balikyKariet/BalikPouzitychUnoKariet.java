@@ -5,6 +5,10 @@ import sk.uniza.fri.karty.Karta;
 
 import java.util.ArrayList;
 
+/** Trieda BalikPouzitychUnoKariet(potomok abstraktnej tredy Balik), slúži na uloženie použitých kariet UNO
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class BalikPouzitychUnoKariet extends Balik {
     public BalikPouzitychUnoKariet(Hra hra) {
         super(hra);

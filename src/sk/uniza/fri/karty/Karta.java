@@ -8,6 +8,10 @@ import sk.uniza.fri.shapesge.Text;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 
+/** Abstraktná trieda Karta
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public abstract class Karta {
     private Color farba;
     private final Znak znak;

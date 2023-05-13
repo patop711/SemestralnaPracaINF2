@@ -1,5 +1,9 @@
 package sk.uniza.fri.karty;
 
+/** Enum trieda Znak, ktorá priradí znak ku karte
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public enum Znak {
     KARTA_NULA("0"),
     KARTA_JEDEN("1"),
@@ -29,7 +33,7 @@ public enum Znak {
     }
 
     /**
-     * Vráti Stringovú hodnotu textu zo Znaku
+     * Vráti hodnotu String z inštancie Znaku
      * @return znak
      */
     public String getText() {

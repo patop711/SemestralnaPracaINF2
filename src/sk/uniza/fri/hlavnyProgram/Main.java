@@ -2,6 +2,10 @@ package sk.uniza.fri.hlavnyProgram;
 
 import javax.swing.JOptionPane;
 
+/** Trieda Main, spustí hru
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class Main {
     public static void main(String[] args) {
         int pocetHracov = 0;
@@ -18,7 +22,20 @@ public class Main {
 
                 Prvý hráč, ktorý sa zbaví všetkých svojich kariet, vyhráva hru. Ak hráč nevie alebo nechce položiť žiadnu kartu, musí si ťahať karty, až kým nebude môcť položiť vhodnú kartu.
 
-                Toto sú základné pravidlá hry Uno. Pevne dúfam, že ti pomôžu začať hrať a užiť si túto skvelú kartovú hru!""", "Uvítacia správa UNO", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, moznosti, moznosti[0]);
+                Toto sú základné pravidlá hry Uno. Pevne dúfam, že ti pomôžu začať hrať a užiť si túto skvelú kartovú hru!
+                
+                Ovládanie:
+                                Klávesa Q >> Použitie karty
+                                Klávesa W >> potiahnutie karty
+                                Klávesa E >> ukončenie hry
+                                
+                                Karty:
+                                KartaDivoka >> výber farby, možno položiť na všetky karty
+                                KartaDivokaTahajStyri >> výber farby, pridanie 4 kariet ďalšiemu hráčovi a následne preskočenie na ďalšieho hráča, možno položiť na všetky karty
+                                KartaNormalna  >> možno položiť na kartu ktorá má buď rovnaký znak alebo farbu
+                                KartaOtocit >> možno položiť na kartu ktorá má rovnakú farbu, otočí sa smer ktorým je ďalší hráč na rade
+                                KartaPreskocit >> možno položiť na kartu ktorá má rovnakú farbu, hráč ktorý je na rade nebude mať možnosť ťahu
+                                KartaTahajDve >> možno položiť na kartu ktorá má rovnakú farbu, ďalší hráč si ťahá 2 karty a stráca možnosť ťahu""", "Uvítacia správa UNO", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, moznosti, moznosti[0]);
         if (n == 0) {
             boolean spravne = false;
             while (!spravne) {

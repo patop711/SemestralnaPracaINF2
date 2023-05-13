@@ -15,6 +15,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/** Trieda BalikUnoKariet(potomok abstraktnej tredy Balik), slúži na vytvorenie balíčka kariet UNO
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class BalikUnoKariet extends Balik {
 
     public BalikUnoKariet(Hra hra) {

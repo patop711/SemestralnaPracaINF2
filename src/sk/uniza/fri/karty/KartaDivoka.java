@@ -4,6 +4,10 @@ import sk.uniza.fri.hrac.Hrac;
 
 import java.awt.Color;
 
+/** Trieda KartaDivoka(potomok triedy Karta)
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class KartaDivoka extends Karta {
 
     public KartaDivoka(int x, int y) {

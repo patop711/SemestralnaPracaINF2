@@ -5,6 +5,10 @@ import sk.uniza.fri.karty.Karta;
 
 import java.util.ArrayList;
 
+/** Abstraktná trieda balík
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public abstract class Balik {
     private final ArrayList<Karta> balicekKarietList;
     private final Hra hra;

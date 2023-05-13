@@ -16,6 +16,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+/** Trieda Hra, vytovrí hru UNO.
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class Hra {
     private final ArrayList<Hrac> hraci;
     private final int pocetHracov;
@@ -199,7 +203,6 @@ public class Hra {
 
         this.getBalikUnoKariet().rozdajKarty(this.getHraci());
         this.skryKartyHracov(this.getHracNaTahu());
-        Karta balickek = new KartaNormalna(40, 400, Color.ORANGE, Znak.KARTA_BALICEK);
 
         //Ked rozdá karty tak vlozi do pouzitých jednu kartu z vrchu z balicka (ešte nepouzitych kariet)
         var indexPoslednejKartyVBalicku = this.getBalikUnoKariet().getBalicekKarietList().size() - 1;
@@ -210,8 +213,8 @@ public class Hra {
         kartaNaZaciatok.zmenPoziciu((1920 / 2), 400);
         var kartaNaZaciatokX = kartaNaZaciatok.getVonkajsiaVrstva().getX();
         var kartaNaZaciatokY = kartaNaZaciatok.getVonkajsiaVrstva().getY();
-        balickek.zmenPoziciu(kartaNaZaciatokX - 90, kartaNaZaciatokY);
-        this.getTextKtoJeNaRade().setX(kartaNaZaciatokX - 20);
+        new KartaNormalna(kartaNaZaciatokX - 90, kartaNaZaciatokY, Color.ORANGE, Znak.KARTA_BALICEK);
+        this.getTextKtoJeNaRade().setX(kartaNaZaciatokX - 120);
         this.getTextKtoJeNaRade().setY(kartaNaZaciatokY - 20);
         this.getTextKtoJeNaRade().makeVisible();
 
@@ -231,7 +234,7 @@ public class Hra {
      * @param pouzitaKarta - pouzita karta ktorá sa má vložiť
      */
     public void pridajPouzituKartu(Karta pouzitaKarta) {
-        pouzitaKarta.zmenPoziciu(700, 400);
+        pouzitaKarta.zmenPoziciu((1920 / 2), 400);
 
         for (Karta karta : this.getBalikPouzitychUnoKariet().getBalicekKarietList()) {
             if (!this.getBalikPouzitychUnoKariet().jeBalicekPrazdny()) {

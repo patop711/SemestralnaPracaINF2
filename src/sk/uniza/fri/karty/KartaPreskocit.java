@@ -3,6 +3,10 @@ package sk.uniza.fri.karty;
 import sk.uniza.fri.hrac.Hrac;
 import java.awt.Color;
 
+/** Trieda KartaPreskocit(potomok triedy Karta)
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class KartaPreskocit extends Karta {
     public KartaPreskocit(int x, int y, Color farba) {
         super(x, y, farba, Znak.KARTA_PRESKOCIT);

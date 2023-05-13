@@ -3,6 +3,10 @@ package sk.uniza.fri.karty;
 import sk.uniza.fri.hrac.Hrac;
 import java.awt.Color;
 
+/** Trieda KartaDivokaTahajStyri(potomok triedy Karta)
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class KartaDivokaTahajStyri extends Karta {
     public KartaDivokaTahajStyri(int x, int y) {
         super(x, y, Color.gray, Znak.KARTA_TAHAJ_STYRI);

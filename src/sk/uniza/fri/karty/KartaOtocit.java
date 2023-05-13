@@ -3,6 +3,10 @@ package sk.uniza.fri.karty;
 import sk.uniza.fri.hrac.Hrac;
 import java.awt.Color;
 
+/** Trieda KartaOtocit(potomok triedy Karta)
+ *  @author Patrik Pavlík
+ *  @version 1.23.15
+ */
 public class KartaOtocit extends Karta {
     public KartaOtocit(int x, int y, Color farba) {
         super(x, y, farba, Znak.KARTA_OTOCIT);
@@ -40,11 +44,7 @@ public class KartaOtocit extends Karta {
 
         if (hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getFarba() == this.getFarba() ||
             hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getZnak() == this.getZnak()) {
-//            if (hrac.getHra().jePoSmereHodinovychRuciciek()) {
-//                hrac.getHra().setPoSmereHodinovychRuciciek(false);
-//            } else {
-//                hrac.getHra().setPoSmereHodinovychRuciciek(true);
-//            }
+
             hrac.getHra().setPoSmereHodinovychRuciciek(!hrac.getHra().jePoSmereHodinovychRuciciek());
             return true;
         } else {
