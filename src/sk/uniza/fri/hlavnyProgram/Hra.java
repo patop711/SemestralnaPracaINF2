@@ -199,7 +199,7 @@ public class Hra {
 
         this.getBalikUnoKariet().rozdajKarty(this.getHraci());
         this.skryKartyHracov(this.getHracNaTahu());
-        new KartaNormalna(40, 400, Color.ORANGE, Znak.KARTA_BALICEK);
+        Karta balickek = new KartaNormalna(40, 400, Color.ORANGE, Znak.KARTA_BALICEK);
 
         //Ked rozdá karty tak vlozi do pouzitých jednu kartu z vrchu z balicka (ešte nepouzitych kariet)
         var indexPoslednejKartyVBalicku = this.getBalikUnoKariet().getBalicekKarietList().size() - 1;
@@ -208,10 +208,11 @@ public class Hra {
             kartaNaZaciatok.vyberSiFarbu();
         }
         kartaNaZaciatok.zmenPoziciu((1920 / 2), 400);
-        var ktoJeNaRadeX = kartaNaZaciatok.getVonkajsiaVrstva().getX() - 20;
-        var ktoJeNaRadeY = kartaNaZaciatok.getVonkajsiaVrstva().getY() - 20;
-        this.getTextKtoJeNaRade().setX(ktoJeNaRadeX);
-        this.getTextKtoJeNaRade().setY(ktoJeNaRadeY);
+        var kartaNaZaciatokX = kartaNaZaciatok.getVonkajsiaVrstva().getX();
+        var kartaNaZaciatokY = kartaNaZaciatok.getVonkajsiaVrstva().getY();
+        balickek.zmenPoziciu(kartaNaZaciatokX - 90, kartaNaZaciatokY);
+        this.getTextKtoJeNaRade().setX(kartaNaZaciatokX - 20);
+        this.getTextKtoJeNaRade().setY(kartaNaZaciatokY - 20);
         this.getTextKtoJeNaRade().makeVisible();
 
         Text textPomoc = new Text("Stlač klávesu\nF1 pre pomoc");
@@ -230,7 +231,7 @@ public class Hra {
      * @param pouzitaKarta - pouzita karta ktorá sa má vložiť
      */
     public void pridajPouzituKartu(Karta pouzitaKarta) {
-        pouzitaKarta.zmenPoziciu((1920 / 2), 400);
+        pouzitaKarta.zmenPoziciu(700, 400);
 
         for (Karta karta : this.getBalikPouzitychUnoKariet().getBalicekKarietList()) {
             if (!this.getBalikPouzitychUnoKariet().jeBalicekPrazdny()) {
@@ -336,7 +337,20 @@ public class Hra {
      * Metoda pomocou ktorej hráč môže zistit ako sa má hra ovládať a ako fungujú jednotlivé karty
      */
     public void pomocka() {
-        JOptionPane.showMessageDialog(null, "Ovládanie:\nKlávesa Q -> Použitie karty\nKlávesa W -> potiahnutie karty\nKlávesa E -> ukončenie hry");
+        JOptionPane.showMessageDialog(null, """
+                Ovládanie:
+                Klávesa Q >> Použitie karty
+                Klávesa W >> potiahnutie karty
+                Klávesa E >> ukončenie hry
+
+                Karty:
+                KartaDivoka >> výber farby, možno položiť na všetky karty
+                KartaDivokaTahajStyri >> výber farby, pridanie 4 kariet ďalšiemu hráčovi a následne preskočenie na ďalšieho hráča, možno položiť na všetky karty
+                KartaNormalna  >> možno položiť na kartu ktorá má buď rovnaký znak alebo farbu
+                KartaOtocit >> možno položiť na kartu ktorá má rovnakú farbu, otočí sa smer ktorým je ďalší hráč na rade
+                KartaPreskocit >> možno položiť na kartu ktorá má rovnakú farbu, hráč ktorý je na rade nebude mať možnosť ťahu
+                KartaTahajDve >> možno položiť na kartu ktorá má rovnakú farbu, ďalší hráč si ťahá 2 karty a stráca možnosť ťahu
+                """);
     }
 
     /**

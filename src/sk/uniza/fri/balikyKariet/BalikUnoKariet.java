@@ -77,8 +77,8 @@ public class BalikUnoKariet extends Balik {
      * Metoda na vytvorenie všetkých 108 kariet UNO
      */
     private void vytvorKarty() {
-        int predvoleneX = 40;
-        int predvoleneY = 400;
+        int predvoleneX = -80;
+        int predvoleneY = 0;
         Color[] poleFarieb = {Color.RED, Color.YELLOW, Color.BLUE, Color.GREEN};
         //NormalneKarty
         for (Color farba : poleFarieb) {
@@ -105,6 +105,7 @@ public class BalikUnoKariet extends Balik {
             this.getBalicekKarietList().add(new KartaDivokaTahajStyri(predvoleneX, predvoleneY));
             this.getBalicekKarietList().add(new KartaDivoka(predvoleneX, predvoleneY));
         }
+
         System.out.println(super.pocetKarietVBaliku());
         this.pomiesajKarty();
     }
