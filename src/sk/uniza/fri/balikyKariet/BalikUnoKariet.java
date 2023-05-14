@@ -109,6 +109,11 @@ public class BalikUnoKariet extends Balik {
             this.getBalicekKarietList().add(new KartaDivokaTahajStyri(predvoleneX, predvoleneY));
             this.getBalicekKarietList().add(new KartaDivoka(predvoleneX, predvoleneY));
         }
+
+        for (Karta karta : this.getBalicekKarietList()) {
+            karta.skrySa();
+        }
+
         this.pomiesajKarty();
     }
 

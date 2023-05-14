@@ -8,9 +8,11 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Trieda Hráč, vytvorí hráča a "ruku" kde bude mať svoje karty
- *  @author Patrik Pavlík
- *  @version 1.23.15
+/**
+ * Trieda Hráč, vytvorí hráča a "ruku" kde bude mať svoje karty
+ *
+ * @author Patrik Pavlík
+ * @version 1.23.15
  */
 public class Hrac {
     private final String meno;
@@ -35,6 +37,7 @@ public class Hrac {
 
     /**
      * Vráti objekt typu Hra
+     *
      * @return hra
      */
     public Hra getHra() {
@@ -83,6 +86,7 @@ public class Hrac {
             karta.vykresli();
         }
     }
+
     /**
      * Vráti String mena hráča
      *
@@ -91,6 +95,7 @@ public class Hrac {
     public String getMeno() {
         return this.meno;
     }
+
     /**
      * Vráti objekt typu ArrayList
      *
@@ -116,9 +121,11 @@ public class Hrac {
                 y += 125;
             }
             kartaVRuke.zmenPoziciu(x, y);
+            kartaVRuke.vykresli();
             i++;
         }
     }
+
     /**
      * Metóda pomocou ktorej si hráč potiahne kartu z balíčka kariet
      */
@@ -155,20 +162,12 @@ public class Hrac {
     public boolean zoberKartu(Karta karta) {
         boolean vysledok = false;
         var pocetKariet = this.getMojeKarty().size();
-        if (this.getMojeKarty().isEmpty()) {
-            Karta prvaKarta = karta;
-            prvaKarta.zmenPoziciu(this.getMenoHraca().getX() + 110, this.getMenoHraca().getY());
-            this.getMojeKarty().add(prvaKarta);
+
+        if (pocetKariet < 14) {
+            this.getMojeKarty().add(karta);
             vysledok = true;
         } else {
-            Karta novaKarta = karta;
-
-            if (pocetKariet < 14) {
-                this.getMojeKarty().add(novaKarta);
-                vysledok = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Hráč ma maximum kariet!\nMusí už použiť niektoré z existujúcich.", "Nie je možné si zobrať kartu", JOptionPane.WARNING_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(null, "Hráč ma maximum kariet!\nMusí už použiť niektoré z existujúcich.", "Nie je možné si zobrať kartu", JOptionPane.WARNING_MESSAGE);
         }
 
         if (vysledok) {

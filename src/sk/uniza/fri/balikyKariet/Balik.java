@@ -5,7 +5,7 @@ import sk.uniza.fri.karty.Karta;
 
 import java.util.ArrayList;
 
-/** Abstraktná trieda balík
+/** Abstraktná trieda Balík
  *  @author Patrik Pavlík
  *  @version 1.23.15
  */
