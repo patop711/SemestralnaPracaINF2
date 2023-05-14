@@ -342,7 +342,7 @@ public class Hra {
                 Ovládanie:
                 Klávesa Q >> Použitie karty
                 Klávesa W >> potiahnutie karty
-                Klávesa E >> ukončenie hry
+                Klávesa Escape >> ukončenie hry
 
                 Karty:
                 KartaDivoka >> výber farby, možno položiť na všetky karty
