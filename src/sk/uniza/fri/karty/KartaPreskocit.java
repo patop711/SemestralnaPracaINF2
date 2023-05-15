@@ -1,11 +1,14 @@
 package sk.uniza.fri.karty;
 
 import sk.uniza.fri.hrac.Hrac;
+
 import java.awt.Color;
 
-/** Trieda KartaPreskocit(potomok triedy Karta)
- *  @author Patrik Pavlík
- *  @version 1.23.15
+/**
+ * Trieda KartaPreskocit(potomok triedy Karta)
+ *
+ * @author Patrik Pavlík
+ * @version 1.23.15
  */
 public class KartaPreskocit extends Karta {
     public KartaPreskocit(int x, int y, Color farba) {
@@ -42,7 +45,8 @@ public class KartaPreskocit extends Karta {
         //Polymorfizmus
         var predchazdajucaKarta = hrac.getHra().getBalikPouzitychUnoKariet().pocetKarietVBaliku() - 1;
 
-        if (hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getFarba() == this.getFarba()) {
+        if (hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getFarba() == this.getFarba() ||
+            hrac.getHra().getBalikPouzitychUnoKariet().dajKartuNaIndexe(predchazdajucaKarta).getZnak() == this.getZnak()) {
             hrac.getHra().dalsiHrac();
             return true;
         }

@@ -1,12 +1,14 @@
 package sk.uniza.fri.hlavnyProgram;
 
-import sk.uniza.fri.balikyKariet.BalikPouzitychUnoKariet;
-import sk.uniza.fri.balikyKariet.BalikUnoKariet;
+import sk.uniza.fri.balikyKariet.Balik;
 import sk.uniza.fri.hrac.Hrac;
 import sk.uniza.fri.karty.Karta;
 import sk.uniza.fri.karty.KartaDivoka;
 import sk.uniza.fri.karty.KartaDivokaTahajStyri;
 import sk.uniza.fri.karty.KartaNormalna;
+import sk.uniza.fri.karty.KartaOtocit;
+import sk.uniza.fri.karty.KartaPreskocit;
+import sk.uniza.fri.karty.KartaTahajDve;
 import sk.uniza.fri.karty.Znak;
 import sk.uniza.fri.shapesge.Manager;
 import sk.uniza.fri.shapesge.Text;
@@ -16,9 +18,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-/** Trieda Hra, vytovrí hru UNO.
- *  @author Patrik Pavlík
- *  @version 1.23.15
+/**
+ * Trieda Hra, vytovrí hru UNO.
+ *
+ * @author Patrik Pavlík
+ * @version 1.23.15
  */
 public class Hra {
     private final ArrayList<Hrac> hraci;
@@ -27,8 +31,8 @@ public class Hra {
     private Hrac hracNaTahu;
     private final Manager manazer;
     private final Text textKtoJeNaRade;
-    private final BalikUnoKariet balikUnoKariet;
-    private final BalikPouzitychUnoKariet balikPouzitychUnoKariet;
+    private final Balik balikUnoKariet;
+    private final Balik balikPouzitychUnoKariet;
 
 
     /**
@@ -50,8 +54,8 @@ public class Hra {
         //Cez Manazera ovladam hru
         this.manazer = new Manager();
         this.getManazer().manageObject(this);
-        this.balikUnoKariet = new BalikUnoKariet(this);
-        this.balikPouzitychUnoKariet = new BalikPouzitychUnoKariet(this);
+        this.balikUnoKariet = new Balik(true);
+        this.balikPouzitychUnoKariet = new Balik(false);
     }
 
     /**
@@ -59,7 +63,7 @@ public class Hra {
      *
      * @return balikPouzitychUnoKariet
      */
-    public BalikPouzitychUnoKariet getBalikPouzitychUnoKariet() {
+    public Balik getBalikPouzitychUnoKariet() {
         return this.balikPouzitychUnoKariet;
     }
 
@@ -68,7 +72,7 @@ public class Hra {
      *
      * @return balikUnoKariet
      */
-    public BalikUnoKariet getBalikUnoKariet() {
+    public Balik getBalikUnoKariet() {
         return this.balikUnoKariet;
     }
 
@@ -78,20 +82,32 @@ public class Hra {
      * @param kolkoKariet - kolko kariet má dostať hrac
      */
     public void dajHracoviKartyPodlaPoctu(int kolkoKariet, boolean jeToPreDalsiehoHraca) {
+
         if (this.getBalikUnoKariet().jeBalicekPrazdny()) {
-            for (int i = this.getBalikPouzitychUnoKariet().pocetKarietVBaliku() - 2; i >= 0 ; i--) {
+            for (int i = this.getBalikPouzitychUnoKariet().pocetKarietVBaliku() - 2; i >= 0; i--) {
                 var kartaNaPridanie = this.getBalikPouzitychUnoKariet().dajKartuNaIndexe(i);
                 this.getBalikUnoKariet().pridajKartuDoBalika(kartaNaPridanie);
                 this.getBalikPouzitychUnoKariet().vymazKartuZBalika(kartaNaPridanie);
             }
-            this.getBalikUnoKariet().dajHracoviKartyPodlaPoctu(kolkoKariet, jeToPreDalsiehoHraca);
-        } else {
-            this.getBalikUnoKariet().dajHracoviKartyPodlaPoctu(kolkoKariet, jeToPreDalsiehoHraca);
+        }
+
+        if (jeToPreDalsiehoHraca) {
+            this.dalsiHrac();
+        }
+        for (int i = 0; i < kolkoKariet; i++) {
+            Karta novaKarta = this.getBalikUnoKariet().dajKartuNaIndexe(0);
+            if (this.getHracNaTahu().zoberKartu(novaKarta)) {
+                this.getBalikUnoKariet().vymazKartuZBalika(novaKarta);
+            }
+        }
+        if (!jeToPreDalsiehoHraca) {
+            this.dalsiHrac();
         }
     }
 
     /**
      * Setter na nastavenie akým smerom majú ísť hráči
+     *
      * @param poSmereHodinovychRuciciek - po smere alebo proti smeru
      */
     public void setPoSmereHodinovychRuciciek(boolean poSmereHodinovychRuciciek) {
@@ -100,6 +116,7 @@ public class Hra {
 
     /**
      * Vráti objekt typu hráč ktorý je na ťahu
+     *
      * @return hracNaTahu
      */
     public Hrac getHracNaTahu() {
@@ -126,6 +143,7 @@ public class Hra {
 
     /**
      * Vráti boolean či sa ide po smere(true) alebo proti smeru(false)
+     *
      * @return poSmereHodinovychRuciciek
      */
     public boolean jePoSmereHodinovychRuciciek() {
@@ -134,6 +152,7 @@ public class Hra {
 
     /**
      * Vráti objekt typu Manager
+     *
      * @return manazer
      */
     public Manager getManazer() {
@@ -142,6 +161,7 @@ public class Hra {
 
     /**
      * Vráti objekt typu Text
+     *
      * @return textKtoJeNaRade
      */
     public Text getTextKtoJeNaRade() {
@@ -206,9 +226,18 @@ public class Hra {
         //Ked rozdá karty tak vlozi do pouzitých jednu kartu z vrchu z balicka (ešte nepouzitych kariet)
         var indexPoslednejKartyVBalicku = this.getBalikUnoKariet().getBalicekKarietList().size() - 1;
         var kartaNaZaciatok = this.getBalikUnoKariet().getBalicekKarietList().get(indexPoslednejKartyVBalicku);
+
         if (kartaNaZaciatok instanceof KartaDivoka || kartaNaZaciatok instanceof KartaDivokaTahajStyri) {
             kartaNaZaciatok.vyberSiFarbu();
+        } else if (kartaNaZaciatok instanceof KartaOtocit) {
+            this.setPoSmereHodinovychRuciciek(false);
+            this.dalsiHrac();
+        } else if (kartaNaZaciatok instanceof KartaPreskocit) {
+            this.dalsiHrac();
+        } else if (kartaNaZaciatok instanceof KartaTahajDve) {
+            this.dajHracoviKartyPodlaPoctu(2, false);
         }
+
         kartaNaZaciatok.zmenPoziciu((1920 / 2), 400);
         var kartaNaZaciatokX = kartaNaZaciatok.getVonkajsiaVrstva().getX();
         var kartaNaZaciatokY = kartaNaZaciatok.getVonkajsiaVrstva().getY();
@@ -230,6 +259,7 @@ public class Hra {
 
     /**
      * Pridá použitú kartu do ArrayListu triedy BalikPouzitychUnoKariet a na plátno
+     *
      * @param pouzitaKarta - pouzita karta ktorá sa má vložiť
      */
     public void pridajPouzituKartu(Karta pouzitaKarta) {
@@ -251,6 +281,7 @@ public class Hra {
     public void dalsiHrac() {
         ArrayList<Hrac> predchadzajuciHraci = new ArrayList<>();
         predchadzajuciHraci.add(this.getHracNaTahu());
+
         for (Hrac hrac : predchadzajuciHraci) {
             if (hrac.getMojeKarty().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Vyhral: " + hrac.getMeno() + " !", "Koniec hry", JOptionPane.INFORMATION_MESSAGE);
@@ -290,6 +321,7 @@ public class Hra {
 
     /**
      * Otočí všetky karty hráčov okrem toho ktorý je na taho
+     *
      * @param hracNaZobrazenie - hrac ktorý je na tahu
      */
     private void skryKartyHracov(Hrac hracNaZobrazenie) {
@@ -331,7 +363,7 @@ public class Hra {
      * Metoda pomocou ktorej sa ovláda akutalny hráč na ťahu cez Manažéra, ak si chce potiahnuť kartu
      */
     public void potiahniKartu() {
-        this.hracNaTahu.potiahniSiKartu();
+        this.getHracNaTahu().getHra().dajHracoviKartyPodlaPoctu(1, false);
     }
 
     /**
@@ -361,4 +393,3 @@ public class Hra {
         System.exit(0);
     }
 }
-
