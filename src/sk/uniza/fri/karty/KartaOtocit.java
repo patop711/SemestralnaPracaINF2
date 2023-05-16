@@ -37,6 +37,11 @@ public class KartaOtocit extends Karta {
         super.zmenPoziciu(x, y);
     }
 
+    /**
+     * KartaOtocit – možno položiť na kartu ktorá má rovnakú farbu, otočí sa smer ktorým je ďalší hráč na rade
+     * @param hrac - ktorý hráč ju ma použiť
+     * @return true alebo false ak sa splní alebo nesplní podmienka
+     */
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Polymorfizmus

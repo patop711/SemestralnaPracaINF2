@@ -221,7 +221,7 @@ public abstract class Karta {
      */
     public void vyberSiFarbu() {
         //Polymorfizmus
-        String[] moznosti = {"Cervena", "Zelena", "Modra", "Zlta"};
+        String[] moznosti = {"Červená", "Zelená", "Modrá", "Žltá"};
         int vysledok = JOptionPane.showOptionDialog(null, "Vyber farbu karty:", "Farba karty", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.PLAIN_MESSAGE, null, moznosti, moznosti[0]);
         switch (vysledok) {

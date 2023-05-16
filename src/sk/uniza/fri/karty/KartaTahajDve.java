@@ -37,6 +37,11 @@ public class KartaTahajDve extends Karta {
         super.zmenPoziciu(x, y);
     }
 
+    /**
+     * KartaTahajDve – možno položiť na kartu ktorá má rovnakú farbu, ďalší hráč si ťahá 2 karty a stráca možnosť ťahu
+     * @param hrac - ktorý hráč ju ma použiť
+     * @return true alebo false ak sa splní alebo nesplní podmienka
+     */
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Polymorfizmus

@@ -40,6 +40,11 @@ public class KartaPreskocit extends Karta {
         super.zmenPoziciu(x, y);
     }
 
+    /**
+     * KartaPreskocit – možno položiť na kartu ktorá má rovnakú farbu, hráč ktorý je na rade nebude mať možnosť ťahu
+     * @param hrac - ktorý hráč ju ma použiť
+     * @return true alebo false ak sa splní alebo nesplní podmienka
+     */
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Polymorfizmus

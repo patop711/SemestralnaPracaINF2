@@ -39,6 +39,11 @@ public class KartaNormalna extends Karta {
         super.zmenPoziciu(x, y);
     }
 
+    /**
+     * KartaNormalna  – možno položiť na kartu ktorá má buď rovnaký znak alebo farbu
+     * @param hrac - ktorý hráč ju ma použiť
+     * @return true alebo false ak sa splní alebo nesplní podmienka
+     */
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Tu sa deje polymorfizmus

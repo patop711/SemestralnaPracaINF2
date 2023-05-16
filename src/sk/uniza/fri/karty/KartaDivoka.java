@@ -39,6 +39,11 @@ public class KartaDivoka extends Karta {
         super.zmenPoziciu(x, y);
     }
 
+    /**
+     * KartaDivoka – výber farby, možno položiť na všetky karty
+     * @param hrac - ktorý hráč ju ma použiť
+     * @return true
+     */
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Tu je polymorfizmus

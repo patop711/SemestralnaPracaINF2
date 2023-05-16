@@ -37,6 +37,11 @@ public class KartaDivokaTahajStyri extends Karta {
         super.zmenPoziciu(x, y);
     }
 
+    /**
+     * KartaDivokaTahajStyri – výber farby, pridanie 4 kariet ďalšiemu hráčovi a následne preskočenie na ďalšieho hráča, možno položiť na všetky karty
+     * @param hrac - ktorý hráč ju ma použiť
+     * @return true
+     */
     @Override
     public boolean vykonajAkciu(Hrac hrac) {
         //Ked je tato karta pouzita, tak sa preskoci na dalsieho hraca, ktorý si musí tahať 4 karty a

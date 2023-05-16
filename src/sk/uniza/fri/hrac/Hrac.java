@@ -6,7 +6,6 @@ import sk.uniza.fri.shapesge.Text;
 
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Trieda Hráč, vytvorí hráča a "ruku" kde bude mať svoje karty
@@ -109,11 +108,10 @@ public class Hrac {
      * Aktualizuje pozície kariet po tom čo sa pridá alebo použije karta
      */
     private void aktualizujPozicieKariet() {
-        List<Karta> karty = this.getMojeKarty();
         int startX = this.getMenoHraca().getX() + 110;
         int startY = this.getMenoHraca().getY();
         int i = 0;
-        for (Karta kartaVRuke : karty) {
+        for (Karta kartaVRuke : this.getMojeKarty()) {
             int x = startX + (i * 88);
             int y = startY;
             if (i >= 7) {
@@ -127,23 +125,14 @@ public class Hrac {
     }
 
     /**
-     * Metóda pomocou ktorej si hráč potiahne kartu z balíčka kariet
-     */
-    public void potiahniSiKartu() {
-        this.getHra().dajHracoviKartyPodlaPoctu(1, false);
-    }
-
-    /**
      * Metóda ktorá použije kartu z hráčovej ruky a následne ju vymaže z ArrayListu a zoradí karty
      *
      * @param karta - karta ktorú použijem z mojej ruky(ArrayListu)
      */
     public void pouziKartu(Karta karta) {
-        List<Karta> karty = this.getMojeKarty();
-        if (karty.contains(karta)) {
+        if (this.getMojeKarty().contains(karta)) {
             if (karta.vykonajAkciu(this)) {
-                int indexKartyNaOdstranenie = this.getMojeKarty().indexOf(karta);
-                karty.remove(indexKartyNaOdstranenie);
+                this.getMojeKarty().remove(karta);
                 this.getHra().pridajPouzituKartu(karta);
                 this.aktualizujPozicieKariet();
                 this.getHra().dalsiHrac();

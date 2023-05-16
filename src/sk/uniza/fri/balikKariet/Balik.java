@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Abstraktná trieda Balík
+ * Trieda Balík, vytvorí buď balík kariet alebo balík na použité karty
  *
  * @author Patrik Pavlík
  * @version 1.23.15
@@ -25,7 +25,7 @@ public class Balik {
     private final boolean jeToBalikNovychKariet;
 
     /**
-     * Parametrický konštruktor abstraktnej triedy
+     * Parametrický konštruktor triedy
      *
      * @param jeToBalikNovychKariet - ak je to balík nových kariet tak sa vytvoria karty a do ArrayListu sa vložia Uno karty
      */

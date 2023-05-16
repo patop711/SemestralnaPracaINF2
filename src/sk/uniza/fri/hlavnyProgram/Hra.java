@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Trieda Hra, vytovrí hru UNO.
+ * Trieda Hra, vytvorí hru UNO.
  *
  * @author Patrik Pavlík
  * @version 1.23.15
@@ -279,14 +279,11 @@ public class Hra {
      * Metoda pomocou ktorej sa prejde na dalsieho hráča
      */
     public void dalsiHrac() {
-        ArrayList<Hrac> predchadzajuciHraci = new ArrayList<>();
-        predchadzajuciHraci.add(this.getHracNaTahu());
 
-        for (Hrac hrac : predchadzajuciHraci) {
+        for (Hrac hrac : this.getHraci()) {
             if (hrac.getMojeKarty().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Vyhral: " + hrac.getMeno() + " !", "Koniec hry", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
-                predchadzajuciHraci.clear();
                 return;
             }
         }
@@ -342,19 +339,17 @@ public class Hra {
     public void pouziKartu() {
         boolean vysledok = false;
         while (!vysledok) {
-            String cisloKarty = JOptionPane.showInputDialog(null, "Zadaj cislo od 1 po " + this.hracNaTahu.getMojeKarty().size() + "\nZadaj ktoru kartu chces pouzit:");
+            String cisloKarty = JOptionPane.showInputDialog(null, "Zadaj čislo od 1 po " + this.hracNaTahu.getMojeKarty().size() + "\nZadaj ktorú kartu chceš použit:");
             try {
                 int karta = Integer.parseInt(cisloKarty);
                 this.getHracNaTahu().pouziKartu(this.getHracNaTahu().getMojeKarty().get((karta - 1)));
                 vysledok = true;
             } catch (IndexOutOfBoundsException e) {
-                JOptionPane.showMessageDialog(null, "Zadal si číslo mänšie ako 1 alebo väčšie ako " + this.hracNaTahu.getMojeKarty().size());
+                JOptionPane.showMessageDialog(null, "Zadal si číslo menšie ako 1 alebo väčšie ako " + this.hracNaTahu.getMojeKarty().size(), "Chyba!", JOptionPane.WARNING_MESSAGE);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Nezadal si cislo, musis zadat cislo od 1 po " + this.hracNaTahu.getMojeKarty().size());
+                JOptionPane.showMessageDialog(null, "Nezadal si čislo!\nMusíš zadať čislo od 1 po " + this.hracNaTahu.getMojeKarty().size(), "Chyba!", JOptionPane.WARNING_MESSAGE);
             } catch (NullPointerException e) {
-                JOptionPane.showMessageDialog(null, "Nemôžeš zadať prázdny vstup!");
-            } catch (IllegalArgumentException e) {
-                JOptionPane.showMessageDialog(null, "Zadal si zly vstup, musis zadat cislo od 1 po " + this.hracNaTahu.getMojeKarty().size());
+                JOptionPane.showMessageDialog(null, "Nemôžeš zadať prázdny vstup!\nMusíš zadať čislo od 1 po " + this.hracNaTahu.getMojeKarty().size(), "Chyba!", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
@@ -363,7 +358,7 @@ public class Hra {
      * Metoda pomocou ktorej sa ovláda akutalny hráč na ťahu cez Manažéra, ak si chce potiahnuť kartu
      */
     public void potiahniKartu() {
-        this.getHracNaTahu().getHra().dajHracoviKartyPodlaPoctu(1, false);
+        this.dajHracoviKartyPodlaPoctu(1, false);
     }
 
     /**

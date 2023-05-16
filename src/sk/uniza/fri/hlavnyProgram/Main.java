@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 public class Main {
     public static void main(String[] args) {
         int pocetHracov = 0;
-        //Zatial to je len takto pretoze chcem aby to bolo ovladane s mysou
         Object[] moznosti = {"Áno, chem hrať 😄", "Nie, necítim sa na to 😒"};
         int n = JOptionPane.showOptionDialog(null, """
                 Uno je kartová hra, ktorá sa hrá so štandardným balíčkom 108 kariet. Hra sa zvyčajne hrá s 2 až 10 hráčmi a cieľom hry je zbaviť sa všetkých svojich kariet.
@@ -35,15 +34,12 @@ public class Main {
             boolean spravne = false;
             while (!spravne) {
                 String inputPocetHracov = JOptionPane.showInputDialog(null, "Zadaj počet hráčov:", "Kartová hra UNO", JOptionPane.QUESTION_MESSAGE);
-                if (inputPocetHracov == null) { // ak bol stlačený Cancel
-                    System.exit(0); // ukonči program
+                if (inputPocetHracov == null) {
+                    System.exit(0); //ak bol stlačený Cancel ukonči sa program
                 }
                 try {
                     pocetHracov = Integer.parseInt(inputPocetHracov);
                     spravne = true;
-                    if (pocetHracov == 1) {
-                        System.exit(0);
-                    }
                 } catch (NumberFormatException nfe) {
                     JOptionPane.showMessageDialog(null, "Musíš zadať číslo!");
                 }
