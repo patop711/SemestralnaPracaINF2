@@ -1,4 +1,4 @@
-package sk.uniza.fri.balikyKariet;
+package sk.uniza.fri.balikKariet;
 
 import sk.uniza.fri.hrac.Hrac;
 import sk.uniza.fri.karty.Karta;

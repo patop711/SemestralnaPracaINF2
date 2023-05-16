@@ -1,6 +1,6 @@
 package sk.uniza.fri.hlavnyProgram;
 
-import sk.uniza.fri.balikyKariet.Balik;
+import sk.uniza.fri.balikKariet.Balik;
 import sk.uniza.fri.hrac.Hrac;
 import sk.uniza.fri.karty.Karta;
 import sk.uniza.fri.karty.KartaDivoka;
